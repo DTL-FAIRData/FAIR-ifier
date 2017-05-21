@@ -1,0 +1,16 @@
+<xml>
+	<pushToFtp>
+		<enabled>false</enabled>
+		<username>demo</username>
+		<password>demo</password>
+		<host>127.0.0.1</host>
+		<directory>/</directory>
+	</pushToFtp>
+	<pushToVirtuoso>
+		<enabled>true</enabled>
+		<username>dba</username>
+		<password>virtDemo</password>
+		<host>127.0.0.1:8890</host>
+		<directory>/DAV/home/dba/rdf_sink/</directory>
+	</pushToVirtuoso>
+</xml>
