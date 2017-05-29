@@ -186,6 +186,31 @@ public abstract class Command {
         }
     }
 
+
+    /**
+     *
+     * @param projectID
+     * @return
+     * @throws ServletException
+     */
+    protected Project getProject(String pid) throws ServletException {
+        if (pid == null || "".equals(pid)) {
+            throw new ServletException("Can't find project: missing ID parameter");
+        }
+        Long id;
+        try {
+            id = Long.parseLong(pid);
+        } catch (NumberFormatException e) {
+            throw new ServletException("Can't find project: badly formatted id #", e);
+        }
+        Project p = ProjectManager.singleton.getProject(id);
+        if (p != null) {
+            return p;
+        } else {
+            throw new ServletException("Failed to find project id #" + pid + " - may be corrupt");
+        }
+    }
+
     /**
      * Utility method for retrieving the ProjectMetadata object having the ID specified
      * in the "project" URL parameter.
