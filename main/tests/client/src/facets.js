@@ -108,9 +108,10 @@ var test_facets = new function() {
     action (test, 'type', {jquery: '("input#dct-license3")[0]', text: "http://purl.org/NET/rdflicense/ukogl3.0"});
     action (test, 'type', {jquery: '("input#dct-hasversion4")[0]', text: "1.0"});
     action   (test, "click",   {jquery: '("input#submit[value=\'Save\']")[0]' });
-    
     action   (test, "click",   {jquery: '("button.button:contains(\'OK\')")[0]' });
-    
+    action (test, 'open',{url:'http://localhost:8080/fdp'});
+    action (test, 'click',{jquery:'("a")[1]'});
+   
     this.test_export_to_fdp = test;	
 
 
