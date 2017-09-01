@@ -618,9 +618,9 @@ ui_test() {
     
     echo "Starting Windmill..."
     if [ -z "$INTERACTIVE" ] ; then
-        "$WINDMILL" firefox firebug loglevel=WARN http://${REFINE_HOST}:${REFINE_PORT}/ jsdir=$REFINE_TEST_DIR/client/src exit
+        "$WINDMILL" chrome loglevel=INFO http://${REFINE_HOST}:${REFINE_PORT}/ jsdir=$REFINE_TEST_DIR/client/src exit
     else
-        "$WINDMILL" firefox firebug loglevel=WARN http://${REFINE_HOST}:${REFINE_PORT}/
+        "$WINDMILL" chrome loglevel=INFO http://${REFINE_HOST}:${REFINE_PORT}/ jsdir=$REFINE_TEST_DIR/client/src
     fi
     
     echo ""

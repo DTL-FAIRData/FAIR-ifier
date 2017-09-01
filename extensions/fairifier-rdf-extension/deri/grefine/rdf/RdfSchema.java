@@ -177,10 +177,10 @@ public class RdfSchema implements OverlayModel {
                 	//TODO backward compatibility 
                 	exp = "value";
                 }
-                node = new CellLiteralNode(columnName, exp, valueType, lang,isRowNumberCell);
+                node = new CellLiteralNode(columnName, exp, valueType, lang,isRowNumberCell, s.getBaseUri());
             } else if ("cell-as-blank".equals(nodeType)) {
             	//TODO blank nodes just accept value as expression
-                node = new CellBlankNode(columnName,"value",isRowNumberCell);
+                node = new CellBlankNode(columnName,"value",isRowNumberCell, s.getBaseUri());
                 reconstructTypes((CellBlankNode)node,o);
             }
         } else if ("resource".equals(nodeType)) {

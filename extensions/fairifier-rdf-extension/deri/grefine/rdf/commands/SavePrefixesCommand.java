@@ -45,6 +45,6 @@ public class SavePrefixesCommand extends RdfCommand{
             writer.endObject();
 		} catch (Exception e) {
             respondException(response, e);
-        }
+            }
 	}
 }

@@ -23,7 +23,8 @@ import java.io.File;
 import java.lang.System;
 
 /**
- * 
+ * A command to get the configuration file that specifies where 
+ * the FAIRifier should push its FAIR data.
  * @author Shamanou van Leeuwen
  * @date 18-05-2017
  *
@@ -32,6 +33,11 @@ import java.lang.System;
 public class GetMetadataPushConfigurationCommand extends Command{
     
     @Override
+    /**
+     * This GET call looks in the file: /extensions/grefine-rdf-extension/config.xml
+     * and returns the configuration in JSON format.
+     * 
+     */
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         StringBuilder contentBuilder = new StringBuilder();
         try {

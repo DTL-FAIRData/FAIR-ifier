@@ -92,7 +92,11 @@ RdfSchemaAlignmentDialog.UINode.prototype._renderMain = function() {
     		for(var i=0;i<self._node.rdfTypes.length;i++){
     			//var f = func(i);
     			var tr = typesTable.insertRow(typesTable.rows.length);
-    			var img = $('<img />').attr("title", "remove type").attr("src", "images/close.png").css("cursor", "pointer").click(func(i));
+    			var img = $('<img />').attr("title", "remove type").attr("src", "images/close.png").css("cursor", "pointer").click(
+    				
+    						func(i)
+    	           
+    			);
     			$(tr).append($('<td>').append(img));
     			$(tr).append($('<td>').text(RdfSchemaAlignmentDialog.UINode._shortenResource(self._getTypeName(self._node.rdfTypes[i]))));
     		}
@@ -253,7 +257,7 @@ RdfSchemaAlignmentDialog.UINode.prototype._showNodeConfigDialog = function(){
 	var self = this;
     var frame = DialogSystem.createDialog();
     
-    frame.width("575px");
+    frame.width("620px");
     
     var header = $('<div></div>').addClass("dialog-header").text("RDF Node").appendTo(frame);
     var body = $('<div class="grid-layout layout-full"></div>').addClass("dialog-body").appendTo(frame);
@@ -645,8 +649,7 @@ RdfSchemaAlignmentDialog.UINode.prototype._preview = function(expr,columnName,is
 				!columnName,
 				RdfSchemaAlignment._defaultNamespace,
 				function(expression){
-					expression = expression.substring(5);//grel:
-					$("#rdf-cell-expr").empty().text(expression);
+				    $("#rdf-cell-expr").empty().text(expression);
 				}
 			);
 	}else{
@@ -659,8 +662,7 @@ RdfSchemaAlignmentDialog.UINode.prototype._preview = function(expr,columnName,is
 				expr,
 				!columnName,
 				function(expression){
-					expression = expression.substring(5);//grel:
-					$("#rdf-cell-expr").empty().text(expression);
+                                    $("#rdf-cell-expr").empty().text(expression);
 				}
 			);
 	}
@@ -866,6 +868,7 @@ RdfSchemaAlignmentDialog.RdfResourceDialog = function(elmt,lookFor,projectId,par
 		}
 	}).bind('fb-select-new',function(e,val){
 		MenuSystem.dismissAll();
+		val = val.trim();
 		if(RdfPrefixesManager.isPrefixedQname(val)){
 			//check that the prefix is defined
 			var prefix = RdfPrefixesManager.getPrefix(val);

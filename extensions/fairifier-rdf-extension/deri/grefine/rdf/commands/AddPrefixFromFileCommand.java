@@ -18,13 +18,13 @@ import org.deri.grefine.rdf.app.ApplicationContext;
 import org.deri.grefine.rdf.vocab.VocabularyImporter;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openrdf.repository.Repository;
-import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.sail.SailRepository;
-import org.openrdf.rio.RDFFormat;
-import org.openrdf.sail.inferencer.fc.ForwardChainingRDFSInferencer;
-import org.openrdf.sail.memory.MemoryStore;
-
+import org.eclipse.rdf4j.repository.Repository;;
+import org.eclipse.rdf4j.repository.RepositoryConnection;
+import org.eclipse.rdf4j.repository.sail.SailRepository;
+import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.sail.inferencer.fc.ForwardChainingRDFSInferencer;
+import org.eclipse.rdf4j.sail.memory.MemoryStore;
+import org.json.JSONWriter;
 
 public class AddPrefixFromFileCommand extends RdfCommand{
 
@@ -49,8 +49,6 @@ public class AddPrefixFromFileCommand extends RdfCommand{
 					prefix = item.getString(); 
 				}else if(item.getFieldName().equals("vocab-uri")){
 					uri = item.getString();
-				}else if(item.getFieldName().equals("file_format")){
-					format = item.getString();
 				}else if(item.getFieldName().equals("project")){
 					projectId = item.getString();
 				}else if(item.getFieldName().equals("file_format")){
@@ -90,28 +88,14 @@ public class AddPrefixFromFileCommand extends RdfCommand{
 
         	getRdfContext().getVocabularySearcher().importAndIndexVocabulary(prefix, uri, repository, projectId, new VocabularyImporter());
         	//success
-        	PrintWriter out = response.getWriter();
-			out.print("<html><body><textarea>\n{\"code\":\"ok\"}\n</textarea></body></html>");
-			out.flush();
+                JSONWriter writer = new JSONWriter(response.getWriter());
+                writer.object();
+                writer.key("code") ; writer.value("ok");
+                writer.endObject();
+
 		} catch (Exception e) {
-			try{
-				JSONObject o = new JSONObject();
-				o.put("code", "error");
-				o.put("message", e.getMessage());
-
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
-				e.printStackTrace(pw);
-				pw.flush();
-				sw.flush();
-
-				o.put("stack", sw.toString());
-
-				response.setCharacterEncoding("UTF-8");
-				respond(response, "<html><body><textarea>\n" + o.toString() + "\n</textarea></body></html>");
-			} catch (JSONException e1) {
-	            e.printStackTrace(response.getWriter());
-	        }
+		    respondException(response, e);
 		}
+
 	}
 }

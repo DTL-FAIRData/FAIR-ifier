@@ -71,8 +71,10 @@ function assert(test, what, params) {
 windmill.macros.asserts = {};
 
 windmill.macros.asserts.rowCount = function (test, count) {
-    wait(test,"forElement", { jquery:  '(".viewPanel-summary-row-count")[0]' } );
-    assert(test,"assertText", { jquery: '(".viewPanel-summary-row-count")[0]', validator: count } );
+    wait(test,"forElement", { jquery:  '(".facet-choice-selected")[0]' } );
+    assert(test, function() {
+        jum.assertNotUndefined($("span.facet-choice-count:contains("+ count +")")[0]);
+    });
 };
 
 windmill.macros.asserts.expectedTopFacetValue = function (test, expected_value) {
@@ -85,7 +87,7 @@ windmill.macros.asserts.expectedTopFacetValue = function (test, expected_value) 
 // ----------------------- register tests ---------------------------
 
 windmill.jsTest.register([
-  "test_facets"
+  "test_facets",
 ]);
 
 windmill.jsTest.require("facets.js");

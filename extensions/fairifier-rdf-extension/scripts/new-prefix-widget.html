@@ -1,6 +1,8 @@
 <div>
   <div bind="message"></div>  
   <table> 
+  
+    <tr><td></td><td><b>Note: </b> please make sure base uri in the rdf resources and the URI are the same.</td></tr>
     <tr><td>prefix:</td><td style="padding-bottom:4px"> <input type="text" bind="prefix" size="4" /></td></tr>  
     <tr><td>URI:</td>
       <td style="padding-bottom:4px"> 
@@ -27,14 +29,6 @@
     	      <input type="hidden" id="vocab-hidden-project" name="project" /> 
     	      <table class="rdf_indented_table" bind="upload_file_table" id="upload_file_table"> 
     	      <tr><td>File:</td><td style="padding-bottom:4px"> <input type="file" bind="file" class="upload_file_inputs" name="file_upload" /></td></tr> 
-<!--     	      <tr><td>Format:</td><td style="padding-bottom:4px">  
-    	        <select name="file_format" class="upload_file_inputs">
-    	    	  <option value="TTL">Turtle (.ttl)</option> 
-    	    	  <option value="RDF/XML">RDF/XML (.xml)</option> 
-    	    	  <option value="N3">N3 (.n3)</option> 
-    	    	  <option value="NTRIPLE">N-Triple (.nt)</option> 
-    	    	</select> 
-    	      </td></tr>  -->
     	      </table>  
     	    </form> 
           </td>

@@ -88,7 +88,7 @@ public class UploadFileAndAddServiceCommand extends AbstractAddServiceCommand{
 						format = "RDF/XML";
 					}else if(format.equals("text/rdf+n3")){
 						format = "N3";
-					}else if(format.equals(" application/n-triples")){
+					}else if(format.equals("application/n-triples")){
 						format = "N-TRIPLE";
 					}
 				}else if(item.getFieldName().equals("file_upload")){
@@ -98,7 +98,7 @@ public class UploadFileAndAddServiceCommand extends AbstractAddServiceCommand{
 			}
 			model = ModelFactory.createDefaultModel();
 
-			System.out.println(format + " " + filename);
+			System.out.println(format + " " + filename + " " + name);
 			model.read(in, null ,format);
 			
 			ImmutableList<String> propUris = asImmutableList(props);
@@ -129,23 +129,15 @@ public class UploadFileAndAddServiceCommand extends AbstractAddServiceCommand{
 	}
 
 	private void respondError(HttpServletResponse response, Exception e) throws IOException, ServletException{
-		try{
-			JSONObject o = new JSONObject();
-			o.put("code", "error");
-			o.put("message", e.getMessage());
-
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			pw.flush();
-			sw.flush();
-
-			o.put("stack", sw.toString());
-
-			response.setCharacterEncoding("UTF-8");
-			respond(response, "<html><body><textarea>\n" + o.toString() + "\n</textarea></body></html>");
-		} catch (JSONException e1) {
-            e1.printStackTrace(response.getWriter());
+	    try {
+	    JSONWriter writer = new JSONWriter(response.getWriter());
+	    writer.object();
+	    writer.key("code") ; writer.value("error");
+	    writer.key("message") ; writer.value(e.getMessage());
+	    writer.endObject();
+        } catch (Exception ex) {
+            respondException(response, ex);
         }
+
 	}
 }

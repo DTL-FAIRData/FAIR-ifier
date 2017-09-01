@@ -124,7 +124,7 @@ RdfSchemaAlignmentDialog.prototype._constructBody = function(body) {
             newRootNode, 
             self._nodeTable, 
             {
-                expanded: true,
+                expanded: true
             }
         ));
     });
@@ -175,7 +175,7 @@ RdfSchemaAlignmentDialog.prototype._renderBody = function(body) {
             this._schema.rootNodes[i], 
             this._nodeTable, 
             {
-                expanded: true,
+                expanded: true
             }
         ));
     }
@@ -197,7 +197,7 @@ RdfSchemaAlignment.createNewRootNode = function(withDefaultChildren) {
         var column = columns[i];
         var target = {
             nodeType: "cell-as-literal",
-            columnName: column.name,
+            columnName: column.name
         };        
         links.push({
                 uri: null,
@@ -234,7 +234,6 @@ RdfSchemaAlignmentDialog.prototype._editBaseUri = function(src){
 RdfSchemaAlignmentDialog.prototype._replaceBaseUri = function(newBaseUri,doNotSave){
 	var self = this;
 	RdfSchemaAlignment._defaultNamespace = newBaseUri;
-    console.log(newBaseUri.substring(0,7));
     if(!newBaseUri || !newBaseUri.match('(http|https):\/\/')){
         alert('Base URI should start with http://');
         return;

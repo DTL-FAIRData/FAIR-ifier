@@ -128,6 +128,7 @@
 		"click-xml": "Click on the first XML element corresponding to the first record to load."
 	},
 	"core-dialogs": {
+		"base-uri" : "Base URL of the RDF skeleton",
 		"cluster-edit": "Cluster & Edit column",
 		"cluster-size": "Cluster Size",
 		"row-count": "Row Count",

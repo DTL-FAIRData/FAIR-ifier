@@ -76,7 +76,7 @@ RdfPrefixesManager.prototype._addPrefix = function(msg,def_prefix,onDone){
 	var self = this;
 	var widget = new NewPrefixWidget(self);
 	widget.show(msg,def_prefix,function(name,uri){
-		self._prefixes.push({name:name,uri:uri});
+		self._prefixes.push({name:name,uri:encodeURI(uri)});
 		self._savePrefixes(function(){
 			self._showPrefixes();
 		});

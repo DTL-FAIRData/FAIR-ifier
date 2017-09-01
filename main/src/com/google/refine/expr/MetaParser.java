@@ -81,7 +81,7 @@ abstract public class MetaParser {
 //                    RT.load("clojure/core"); // Make sure RT is initialized
                     Object foo = RT.CURRENT_NS; // Make sure RT is initialized
                     IFn fn = (IFn) clojure.lang.Compiler.load(new StringReader(
-                            "(fn [value cell cells row rowIndex] " + s + ")"
+                            "(fn [value cell cells row rowIndex baseUri] " + s + ")"
                         ));
 
                     // TODO: We should to switch from using Compiler.load
@@ -106,7 +106,8 @@ abstract public class MetaParser {
                                     bindings.get("cell"),
                                     bindings.get("cells"),
                                     bindings.get("row"),
-                                    bindings.get("rowIndex")
+                                    bindings.get("rowIndex"),
+                                    bindings.get("baseUri")
                                 );
                             } catch (Exception e) {
                                 return new EvalError(e.getMessage());

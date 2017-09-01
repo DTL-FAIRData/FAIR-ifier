@@ -3,6 +3,7 @@ package org.deri.grefine.rdf;
 import java.lang.reflect.Array;
 import java.net.URI;
 
+import org.deri.grefine.rdf.app.ApplicationContext;
 import org.json.JSONException;
 import org.json.JSONWriter;
 import org.openrdf.model.BNode;
@@ -18,18 +19,20 @@ public class CellBlankNode extends ResourceNode implements CellNode{
     final private String columnName;
     final boolean isRowNumberCell;
     final private String expression;
+    final private URI baseUri;
     
-    public CellBlankNode(String columnName,String exp,boolean isRowNumberCell){
+    public CellBlankNode(String columnName,String exp,boolean isRowNumberCell, URI baseUri){
         this.columnName = columnName;
         this.isRowNumberCell = isRowNumberCell;
         this.expression = exp;
+        this.baseUri = baseUri;
     }
     
     @Override
     public Resource[] createResource(URI baseUri, ValueFactory factory, Project project,
             Row row, int rowIndex,BNode[] blanks) {
     	try{
-    		Object result = Util.evaluateExpression(project, expression, columnName, row, rowIndex);
+    		Object result = Util.evaluateExpression(project, expression, columnName, row, rowIndex, this.baseUri);
     		if(result.getClass()==EvalError.class){
     			return null;
     		}

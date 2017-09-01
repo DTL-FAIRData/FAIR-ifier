@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONWriter;
+import org.json.JSONException;
 import com.google.refine.commands.Command;
 import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.rio.RDFParseException;
@@ -28,7 +29,7 @@ import nl.dtl.fairmetadata4j.utils.*;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.IRI;
 /**
- * 
+ * A command to get all the metadata from a FAIR Data Point(FDP)
  * @author Shamanou van Leeuwen
  * @date 1-11-2016
  *
@@ -37,6 +38,19 @@ import org.eclipse.rdf4j.model.IRI;
 public class GetFairDataPointInfoCommand extends Command{
     private SimpleValueFactory f;
     
+    /**
+     * 
+     * This method retrieves the catalog and dataset information
+     * depending on what is specified in the POST call.
+     * 
+     * I returns the content with a "content" key.
+     * 
+     * When the method reports an error it returns this to the frontend.
+     * 
+     * @param req a request object
+     * @param res a response object 
+     * @see com.google.refine.commands.Command#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         f = SimpleValueFactory.getInstance();
@@ -46,7 +60,6 @@ public class GetFairDataPointInfoCommand extends Command{
             res.setHeader("Content-Type", "application/json");
             JSONWriter writer = new JSONWriter(res.getWriter());
             writer.object();
-            writer.key("code"); writer.value("ok");
             if (req.getParameter("layer").equals("catalog")){
                 writer.key("content"); 
                 writer.value(this.getFdpCatalogs(uri));
@@ -54,13 +67,36 @@ public class GetFairDataPointInfoCommand extends Command{
                 writer.key("content"); 
                 writer.value(this.getFdpDatasets(uri));
             }
-            
+            writer.key("code"); writer.value("ok");
             writer.endObject();
         }catch(Exception e){
-            System.out.println(e.getMessage());
+               try {
+                res.setCharacterEncoding("UTF-8");
+                res.setHeader("Content-Type", "application/json");
+                JSONWriter writer = new JSONWriter(res.getWriter());
+                writer.object();
+                writer.key("code"); writer.value("error");
+                writer.key("error"); writer.value(e.getMessage());
+                writer.endObject();
+               }catch (Exception ex) {
+                   System.out.println(ex.getMessage());
+               }
         }
     }
 
+    /**
+     * 
+     * Get all datasets in a FDP based on the url of the FDP.
+     * 
+     * This method uses the FAIRMetadata4j library.
+     * 
+     * @param url
+     * @return ArrayList<DatasetMetadata>
+     * @throws IOException
+     * @throws RDFParseException
+     * @throws RDFHandlerException
+     * @throws LayerUnavailableException
+     */
     private ArrayList<DatasetMetadata> getFdpDatasets(String url) throws IOException, RDFParseException, RDFHandlerException, LayerUnavailableException{
         f = SimpleValueFactory.getInstance();
         ArrayList<DatasetMetadata> out = new ArrayList<DatasetMetadata>();
@@ -88,6 +124,20 @@ public class GetFairDataPointInfoCommand extends Command{
         return out;
     }
     
+    /**
+     * 
+     * Get all catalogs in a FDP based on the url of the FDP.
+     * 
+     * This method uses the FAIRMetadata4j library.
+     * 
+     * 
+     * @param url
+     * @return ArrayList<CatalogMetadata>
+     * @throws IOException
+     * @throws LayerUnavailableException
+     * @throws RDFParseException
+     * @throws RDFHandlerException
+     */
     private ArrayList<CatalogMetadata> getFdpCatalogs(String url) throws IOException, LayerUnavailableException, RDFParseException, RDFHandlerException{
         f = SimpleValueFactory.getInstance();
         ArrayList<CatalogMetadata> out = new ArrayList<CatalogMetadata>();

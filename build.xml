@@ -159,10 +159,21 @@
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/fairDatapointPost.js" tofile="extensions/grefine-rdf-extension/module/scripts/fairDatapointPost.js" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-alignment.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-schema-alignment.js" />
 
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-data-table-view.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-data-table-view.js" />
+
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-vocabulary-manager.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-schema-vocabulary-manager.js" />
 
-
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-alignment-ui-node.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-schema-alignment-ui-node.js" />
+
+
+        <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-data-table-view.js" tofile="module/scripts/rdf-data-table-view.js" />
+
+        <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-vocabulary-manager.js" tofile="module/scripts/rdf-schema-vocabulary-manager.js" />
+
+        <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-alignment-ui-node.js" tofile="module/scripts/rdf-schema-alignment-ui-node.js" />
+
+        <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-alignment.js" tofile="module/scripts/rdf-schema-alignment.js" />
+
 
         <copy overwrite="true" todir="extensions/grefine-rdf-extension/src/org">
             <fileset dir="extensions/fairifier-rdf-extension/dtls"/>
@@ -171,26 +182,52 @@
             <fileset dir="extensions/fairifier-rdf-extension/lib"/>
         </copy>
 
+        	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/vocab/imp/VocabularySearcher.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/vocab/imp/VocabularySearcher.java" />
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/vocab/IVocabularySearcher.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/vocab/IVocabularySearcher.java" />
+
+
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/AddPrefixCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/AddPrefixCommand.java" />
+
+    	
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/reconcile/commands/UploadFileAndAddServiceCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/reconcile/commands/UploadFileAndAddServiceCommand.java" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/RdfCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/RdfCommand.java" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/SuggestTermCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/SuggestTermCommand.java" />
-
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/vocab/VocabularyImporter.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/vocab/VocabularyImporter.java" />
-
-        <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/vocab/imp/VocabularySearcher.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/vocab/imp/VocabularySearcher.java" />
-
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/AddPrefixFromFileCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/AddPrefixFromFileCommand.java" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/SuggestTermCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/SuggestTermCommand.java" />
 
+        <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/exporters/RdfExporter.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/exporters/RdfExporter.java" />
+
+
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/config.xml" tofile="extensions/grefine-rdf-extension/config.xml" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/RdfSchema.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/RdfSchema.java" />
+       
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellLiteralNode.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/CellLiteralNode.java" />
 
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellLiteralNode.java" tofile="src/org/deri/grefine/rdf/CellLiteralNode.java" />
+    	
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellBlankNode.java" tofile="src/org/deri/grefine/rdf/CellBlankNode.java" />
+    	
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellBlankNode.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/CellBlankNode.java" />
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellBlankNode.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/CellBlankNode.java" />
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/expr/util/RdfExpressionUtil.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/expr/util/RdfExpressionUtil.java" />
+
+        <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellResourceNode.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/CellResourceNode.java" />
+
+    	
+
+        <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/PreviewRdfValueExpressionCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/PreviewRdfValueExpressionCommand.java" />
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/PreviewRdfValueExpressionCommand.java" tofile="src/org/deri/grefine/rdf/commands/PreviewRdfValueExpressionCommand.java" />
+    	
+        <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/expr/RdfBinder.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/expr/RdfBinder.java" />
+
+    	
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/Util.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/Util.java" />
 
 
@@ -212,6 +249,13 @@
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/new-prefix-widget.html" tofile="extensions/grefine-rdf-extension/module/scripts/new-prefix-widget.html" />
 
+        <delete file="extensions/grefine-rdf-extension/module/MOD-INF/lib/tika-core-1.4.jar"/>
+    	<delete file="extensions/grefine-rdf-extension/module/MOD-INF/lib/tika-parsers-1.4.jar"/>
+    	<delete file="extensions/grefine-rdf-extension/module/MOD-INF/lib/apache-any23-encoding-0.8.0.jar"/>
+    	<delete file="extensions/grefine-rdf-extension/module/MOD-INF/lib/apache-any23-api-0.8.0.jar"/>
+    	<delete file="extensions/grefine-rdf-extension/module/MOD-INF/lib/apache-any23-core-0.8.0.jar"/>
+    	<delete file="extensions/grefine-rdf-extension/module/MOD-INF/lib/apache-any23-mime-0.8.0.jar"/>
+    	
 
     	<ant dir="extensions/" target="build" />
     </target>

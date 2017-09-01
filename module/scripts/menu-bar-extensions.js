@@ -174,7 +174,7 @@ ReconciliationStanbolServiceDialog.prototype.printAddedService = function(contai
 	}
 	container.append(sniper).fadeIn("slow");
 };
-
+/**
 function ReconciliationSindiceServiceDialog(){
 	var self = this;
 	var frame = DialogSystem.createDialog();
@@ -223,7 +223,7 @@ ReconciliationSindiceServiceDialog.prototype._footer= function(footer){
         DialogSystem.dismissUntil(self._level - 1);
     }).appendTo(footer);
 };
-
+**/
 function ReconciliationRdfServiceDialog(){
 	var self = this;
 	var dialog = $(DOM.loadHTML("rdf-extension","scripts/rdf-service-dialog.html"));

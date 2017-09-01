@@ -113,11 +113,12 @@ public class RdfExporter implements WriterExporter{
     }
     
     public String getContentType() {
-        if(format.equals(RDFFormat.TURTLE)){
-            return "text/turtle";
-        }else{
-            return "application/rdf+xml";
-        }
+        // if(format.equals(RDFFormat.TURTLE)){
+        //     return "text/turtle";
+        // }else{
+        //     return "application/rdf+xml";
+        // }
+        return "application/force-download";
     }
 
     public boolean takeWriter() {

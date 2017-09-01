@@ -23,6 +23,8 @@ public class CellLiteralNode implements CellNode{
     final private String columnName;
     final boolean isRowNumberCell;
     final private String expression;
+    final private URI baseUri;
+    
     
     public String getValueType() {
         return valueType;
@@ -32,12 +34,13 @@ public class CellLiteralNode implements CellNode{
         return lang;
     }
     
-    public CellLiteralNode(String columnName, String exp, String valueType,String lang,boolean isRowNumberCell){
+    public CellLiteralNode(String columnName, String exp, String valueType,String lang,boolean isRowNumberCell, URI baseUri){
     	this.columnName = columnName;
         this.lang = lang;
         this.valueType = valueType;
         this.isRowNumberCell = isRowNumberCell;
         this.expression = exp;
+        this.baseUri = baseUri;
     }
     @Override
     public Value[] createNode(URI baseUri, ValueFactory factory, RepositoryConnection con, Project project,
@@ -46,7 +49,7 @@ public class CellLiteralNode implements CellNode{
 
         	
         try{
-            Object result = Util.evaluateExpression(project, expression, columnName, row, rowIndex);
+            Object result = Util.evaluateExpression(project, expression, columnName, row, rowIndex, baseUri);
             
             if(result.getClass()==EvalError.class){
             	return null;

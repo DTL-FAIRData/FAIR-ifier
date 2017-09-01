@@ -34,7 +34,7 @@ public class CellResourceNode extends ResourceNode implements CellNode{
     @Override
     public Resource[] createResource(URI baseUri,ValueFactory factory,Project project,Row row,int rowIndex,BNode[] blanks) {
         try{
-        	Object result = Util.evaluateExpression(project, uriExpression, columnName, row, rowIndex);
+        	Object result = Util.evaluateExpression(project, uriExpression, columnName, row, rowIndex, baseUri);
             if(result.getClass()==EvalError.class){
             	return null;
             }

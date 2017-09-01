@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package com.google.refine.expr;
 
+import java.net.URI;
 import java.util.Properties;
 
 import com.google.refine.model.Cell;
@@ -43,4 +44,6 @@ public interface Binder {
     public void initializeBindings(Properties bindings, Project project);
         
     public void bind(Properties bindings, Row row, int rowIndex, String columnName, Cell cell);
+    
+    public void bind(Properties bindings, Row row, int rowIndex, String columnName, Cell cell, URI baseUri);
 }
