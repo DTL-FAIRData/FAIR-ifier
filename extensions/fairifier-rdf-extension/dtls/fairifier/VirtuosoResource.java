@@ -24,7 +24,16 @@ public class VirtuosoResource extends Resource{
     private String password;
     private static final Logger log = LoggerFactory.getLogger(VirtuosoResource.class);
 
-
+    /**
+     * 
+     * This constructor takes in the parameters needed to push to a Virtuoso WEBDAV directory.
+     *
+     * @param host the full hostname including the protocol, for example: http://dtls.nl
+     * @param filename the name with which the file will be saved on the Virtuoso server.
+     * @param username the Virtuoso username
+     * @param password the Virtuoso password
+     * @param directory the path where the file should be store on the Virtuoso server.
+     */
     public VirtuosoResource(String host, String filename, String username, String password, String directory){
         this.host = host;
         this.filename = filename;
@@ -33,6 +42,10 @@ public class VirtuosoResource extends Resource{
         this.directory = directory;
     }
     
+    /**
+     * Check if there is a model and if so push it to Virtuoso.
+     * 
+     */
     public void push(){
         if (!this.hasModel()){
             throw new IllegalArgumentException("Data of Resource object not set!");

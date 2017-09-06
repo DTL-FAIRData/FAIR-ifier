@@ -37,18 +37,40 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
 /**
- * 
+ * Enables automatic file format detection
  * @author Shamanou van Leeuwen
  * @date May 24 2017
  *
  */
 
+
+/**
+ * A command which detects the file format, should be configured in the controller 
+ * and called from the javascript front-end.
+ * 
+ */
 public class DetectFileFormatCommand extends Command{
     RDFParser rdfParserttl = new TurtleParser();
     RDFParser rdfParserntriples = new NTriplesParser();
 
     RDFParser[] parsers;
 
+    /**
+     * This method takes a request containing rdf and tries to iterate over 
+     * different parsers to see which one is able to parse the data.
+     * If it is able to be parsed a format string is returned by passing it 
+     * to the response object in JSON-format. 
+     * 
+     * When there is no format detected the parser defaults to rdf/xml.
+     * 
+     * Other formats that can be parsed are Turtle and Ntripples.
+     * NOTE: Sesame supports more formats but the currently used version 
+     * gave problems with other parsers. 
+     * 
+     * @param req a request object
+     * @param res a response object
+     * @see com.google.refine.commands.Command#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         

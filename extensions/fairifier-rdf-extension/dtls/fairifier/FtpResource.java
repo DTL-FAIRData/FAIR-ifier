@@ -12,11 +12,19 @@ import java.io.InputStream;
 import java.io.BufferedInputStream;
 
 /**
+ * A resource to store FAIR data in FTP
  * @author Shamanou van Leeuwen
  * @date 13-12-2016
  *
  */
 
+/**
+ * 
+ * A extension of the abstract class Resource 
+ * to be able to push FAIR data to FTP.
+ * @author Shamanou van Leeuwen
+ *
+ */
 public class FtpResource extends Resource{
     private String out;
     private String username;
@@ -25,6 +33,17 @@ public class FtpResource extends Resource{
     private String location;
     private String filename;
 
+    
+    /**
+     * 
+     * A constructor which defines the resource with the necessary parameters for FTP
+     * 
+     * @param host is the full hostname including the protocol, for example: http://dtls.nl
+     * @param username the FTP username
+     * @param password the FTP password
+     * @param location the path where the file should be store on the FTP server.
+     * @param filename the name with which the file will be saved on the FTP server.
+     */
     public FtpResource(String host, String username, String password, String location, String filename){
         this.host = host;
         this.password = password;
@@ -33,6 +52,13 @@ public class FtpResource extends Resource{
         this.filename = filename;
     }
     
+    /**
+     * This method overrides the push method from the abstract class Resource
+     * and implements it. It allows pushing to an FTP server with the in constructor
+     * predefined parameters.
+     * 
+     */
+    @Override
     public void push(){
         if (!this.hasModel()){
             throw new IllegalArgumentException("Data of Resource object not set!");

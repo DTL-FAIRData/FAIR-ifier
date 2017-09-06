@@ -1,6 +1,7 @@
 package org.dtls.fairifier;
 
 /**
+ * A adapter which takes a resource and pushes it.
  * @author Shamanou van Leeuwen
  * @date 28-11-2016
  *

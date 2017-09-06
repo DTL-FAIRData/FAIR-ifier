@@ -57,6 +57,15 @@ import java.util.UUID;
 public class PostFairDataToFairDataPoint extends Command{
     private SimpleValueFactory f;
 
+    /**
+     * This POST call should be called to POST FAIR data to a FAIR data Point.
+     * 
+     * This method also uploads the data to the configured resource.
+     * 
+     *  
+     *  This method uses the FAIRMetadata4j library.
+     * 
+     */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         f = SimpleValueFactory.getInstance();

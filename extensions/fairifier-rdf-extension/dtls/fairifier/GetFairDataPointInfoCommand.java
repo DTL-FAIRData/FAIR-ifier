@@ -29,7 +29,7 @@ import nl.dtl.fairmetadata4j.utils.*;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.IRI;
 /**
- * 
+ * A command to get all the metadata from a FAIR Data Point(FDP)
  * @author Shamanou van Leeuwen
  * @date 1-11-2016
  *
@@ -38,6 +38,19 @@ import org.eclipse.rdf4j.model.IRI;
 public class GetFairDataPointInfoCommand extends Command{
     private SimpleValueFactory f;
     
+    /**
+     * 
+     * This method retrieves the catalog and dataset information
+     * depending on what is specified in the POST call.
+     * 
+     * I returns the content with a "content" key.
+     * 
+     * When the method reports an error it returns this to the frontend.
+     * 
+     * @param req a request object
+     * @param res a response object 
+     * @see com.google.refine.commands.Command#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         f = SimpleValueFactory.getInstance();
@@ -71,6 +84,19 @@ public class GetFairDataPointInfoCommand extends Command{
         }
     }
 
+    /**
+     * 
+     * Get all datasets in a FDP based on the url of the FDP.
+     * 
+     * This method uses the FAIRMetadata4j library.
+     * 
+     * @param url
+     * @return ArrayList<DatasetMetadata>
+     * @throws IOException is thrown when metadata cannot be read from the URL provided
+     * @throws RDFParseException is thrown when the metadata could not be parsed
+     * @throws RDFHandlerException thrown when a incorrect rdf parser is provided
+     * @throws LayerUnavailableException is thrown when no dataset metadata layer could be found at the provided url
+     */
     private ArrayList<DatasetMetadata> getFdpDatasets(String url) throws IOException, RDFParseException, RDFHandlerException, LayerUnavailableException{
         f = SimpleValueFactory.getInstance();
         ArrayList<DatasetMetadata> out = new ArrayList<DatasetMetadata>();
@@ -98,6 +124,20 @@ public class GetFairDataPointInfoCommand extends Command{
         return out;
     }
     
+    /**
+     * 
+     * Get all catalogs in a FDP based on the url of the FDP.
+     * 
+     * This method uses the FAIRMetadata4j library.
+     * 
+     * 
+     * @param url
+     * @return ArrayList<CatalogMetadata>
+     * @throws IOException is thrown when metadata cannot be read from the URL provided
+     * @throws RDFParseException is thrown when the metadata could not be parsed
+     * @throws RDFHandlerException thrown when a incorrect rdf parser is provided
+     * @throws LayerUnavailableException is thrown when no dataset metadata layer could be found at the provided url
+     */
     private ArrayList<CatalogMetadata> getFdpCatalogs(String url) throws IOException, LayerUnavailableException, RDFParseException, RDFHandlerException{
         f = SimpleValueFactory.getInstance();
         ArrayList<CatalogMetadata> out = new ArrayList<CatalogMetadata>();

@@ -40,6 +40,13 @@ import java.lang.Exception;
 public class GetRDFCommand extends Command{
     
     @Override
+    /**
+     * Returns the RDF belonging to a project.
+     * 
+     * The POST call parses the project ID provided
+     * and returns the RDF belonging to that project.
+     * 
+     */
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         Engine engine = null;
         Project project = getProject(req);
