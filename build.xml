@@ -165,7 +165,6 @@
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-alignment-ui-node.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-schema-alignment-ui-node.js" />
 
-
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-data-table-view.js" tofile="module/scripts/rdf-data-table-view.js" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-vocabulary-manager.js" tofile="module/scripts/rdf-schema-vocabulary-manager.js" />
@@ -185,10 +184,8 @@
         	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/vocab/imp/VocabularySearcher.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/vocab/imp/VocabularySearcher.java" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/vocab/IVocabularySearcher.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/vocab/IVocabularySearcher.java" />
 
-
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/AddPrefixCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/AddPrefixCommand.java" />
 
-    	
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/reconcile/commands/UploadFileAndAddServiceCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/reconcile/commands/UploadFileAndAddServiceCommand.java" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/RdfCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/RdfCommand.java" />
@@ -201,10 +198,8 @@
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/SuggestTermCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/SuggestTermCommand.java" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/exporters/RdfExporter.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/exporters/RdfExporter.java" />
-
-
-
-        <copy overwrite="true" file="extensions/fairifier-rdf-extension/config.xml" tofile="extensions/grefine-rdf-extension/config.xml" />
+        
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/config.xml" tofile="extensions/grefine-rdf-extension/config.xml" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/RdfSchema.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/RdfSchema.java" />
        
@@ -220,8 +215,6 @@
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellResourceNode.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/CellResourceNode.java" />
 
-    	
-
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/PreviewRdfValueExpressionCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/PreviewRdfValueExpressionCommand.java" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/PreviewRdfValueExpressionCommand.java" tofile="src/org/deri/grefine/rdf/commands/PreviewRdfValueExpressionCommand.java" />
     	
@@ -232,13 +225,12 @@
 
 
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/HttpUtils.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/utils/HttpUtils.java" />
-
+    	
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/dtls/fairifier/DetectFileFormatCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/commands/DetectFileFormatCommand" />
 
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/menu-bar-extensions.js" tofile="extensions/grefine-rdf-extension/module/scripts/menu-bar-extensions.js" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-alignment-ui-link.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-schema-alignment-ui-link.js" />
-
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/suggestterm.suggest.js" tofile="extensions/grefine-rdf-extension/module/scripts/suggestterm.suggest.js" />
 

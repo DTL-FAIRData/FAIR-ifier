@@ -73,7 +73,7 @@ RdfSchemaAlignmentDialog.prototype._constructBody = function(body) {
     
     var html = $(
     	'<p class="base-uri-space"><span class="emphasized">Base URI:</span> <span bind="baseUriSpan" ></span> <a href="#" bind="editBaseUriLink">edit</a></p>'+
-        '<div id="rdf-schema-alignment-tabs" class="refine-tabs">' +
+    	'<div id="rdf-schema-alignment-tabs" class="refine-tabs">' +
             '<ul>' +
                 '<li><a href="#rdf-schema-alignment-tabs-schema">Semantic model</a></li>' +
                 '<li><a href="#rdf-schema-alignment-tabs-preview">RDF Preview</a></li>' +
@@ -113,6 +113,10 @@ RdfSchemaAlignmentDialog.prototype._constructBody = function(body) {
                     }
                 }
             );
+        var fileType = window.prompt("filetype","");
+        $.post("command/rdf-extension/save-rdf-skeleton",{model: JSON.stringify(self.getJSON()), projectId: theProject.id, fileType: fileType},function(data){
+            alert('RDF skeleton saved sucessfully');
+        });
     });
     
     elmts.add_another_root_node.click(function(e){

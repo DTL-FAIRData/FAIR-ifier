@@ -133,7 +133,8 @@ function init() {
     RefineServlet.registerCommand(module, "get-project-rdf", new GetRDFCommand());
     RefineServlet.registerCommand(module, "get-push-configuration", new GetMetadataPushConfigurationCommand());
     RefineServlet.registerCommand(module, "detect-format-service", new DetectFileFormatCommand());
-    
+    RefineServlet.registerCommand(module, "save-rdf-skeleton", new SaveRdfSkeletonCommand());
+
     //Vocabs commands
     RefineServlet.registerCommand(module, "save-prefixes", new SavePrefixesCommand(ctxt));
     RefineServlet.registerCommand(module, "get-default-prefixes", new GetDefaultPrefixesCommand(ctxt));
