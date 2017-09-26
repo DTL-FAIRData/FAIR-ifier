@@ -231,6 +231,7 @@
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/menu-bar-extensions.js" tofile="extensions/grefine-rdf-extension/module/scripts/menu-bar-extensions.js" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-alignment-ui-link.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-schema-alignment-ui-link.js" />
+        <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-skeleton-list.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-skeleton-list.js" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/suggestterm.suggest.js" tofile="extensions/grefine-rdf-extension/module/scripts/suggestterm.suggest.js" />
 

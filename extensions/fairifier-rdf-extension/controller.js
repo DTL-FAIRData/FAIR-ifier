@@ -134,6 +134,8 @@ function init() {
     RefineServlet.registerCommand(module, "get-push-configuration", new GetMetadataPushConfigurationCommand());
     RefineServlet.registerCommand(module, "detect-format-service", new DetectFileFormatCommand());
     RefineServlet.registerCommand(module, "save-rdf-skeleton", new SaveRdfSkeletonCommand());
+    RefineServlet.registerCommand(module, "load-rdf-skeleton", new LoadRdfSkeletonCommand());
+    RefineServlet.registerCommand(module, "list-rdf-skeletons", new ListRdfSkeletonsCommand());
 
     //Vocabs commands
     RefineServlet.registerCommand(module, "save-prefixes", new SavePrefixesCommand(ctxt));
@@ -187,7 +189,8 @@ function init() {
             "scripts/fairDatapointPost.js",
             "scripts/fairDatapointPost-catalog.js",
             "scripts/fairDatapointPost-dataset.js",
-            "scripts/fairDatapointPost-distribution.js"
+            "scripts/fairDatapointPost-distribution.js",
+            "scripts/rdf-skeleton-list.js"
 		]
     );
 

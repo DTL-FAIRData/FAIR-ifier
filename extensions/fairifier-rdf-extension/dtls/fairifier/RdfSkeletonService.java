@@ -1,5 +1,6 @@
 package org.dtls.fairifier;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -12,8 +13,8 @@ import java.util.List;
  */
 
 interface RdfSkeletonService {
-    public List<String> listModels(String fileType);
-    public List<String> listModels();
-    public void saveModel(String json, String fileType, String projectId);
-    public String loadModel(String ProjectId);
+    public List<String> listModels(String fileType) throws IOException;
+    public List<String> listModels()  throws IOException;
+    public void saveModel(String json, String fileType, String projectId)  throws IOException;
+    public String loadModel(String ProjectId)  throws IOException;
 }
