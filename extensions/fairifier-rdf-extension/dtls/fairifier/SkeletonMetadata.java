@@ -3,6 +3,7 @@ package org.dtls.fairifier;
 
 public class SkeletonMetadata {
     private String fileType;
+    private String title;
 
     /**
      * @return the fileType
@@ -17,4 +18,12 @@ public class SkeletonMetadata {
     public void setFileType(String fileType) {
         this.fileType = fileType;
     }
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public String getTitle() {
+        return this.title;
+    }    
 }

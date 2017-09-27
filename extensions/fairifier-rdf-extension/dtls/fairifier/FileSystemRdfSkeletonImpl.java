@@ -25,34 +25,33 @@ public class FileSystemRdfSkeletonImpl implements RdfSkeletonService {
 
     
     @Override
-    public List<String> listModels(final String fileType)  throws IOException {
+    public List<String[]> listModels(final String fileType)  throws IOException {
         return Files.list(SAVELOCATION)
                 .filter(Files::isRegularFile)
                 .map(this::getStringAndFiletype)
-                .filter(val -> val[0] != null)
-                .filter(val -> val[1].equals(fileType) )
-                .map(element -> element[0])
+                .filter(val -> val[1] != null)
+                .filter(val -> val[2].equals(fileType) )
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<String> listModels()  throws IOException {
+    public List<String[]> listModels()  throws IOException {
         return Files.list(SAVELOCATION)
                 .filter(Files::isRegularFile)
                 .map(this::getStringAndFiletype)
                 .filter(val -> val[0] != null)
-                .map(element -> element[0])
                 .collect(Collectors.toList());
     }
     
     @Override
-    public void saveModel(String json, String fileType, String projectId)  throws IOException {
+    public void saveModel(String json, String fileType, String title,String projectId)  throws IOException {
         Path fileLocation = Paths.get(SAVELOCATION.toString() + File.separator + projectId + ".skeleton.json");        
         Files.write(fileLocation, json.getBytes(StandardCharsets.UTF_8));
         fileLocation = Paths.get(SAVELOCATION.toString() + File.separator + projectId + ".metadata.skeleton.json");
         try (BufferedWriter writer = Files.newBufferedWriter(fileLocation)) {
             SkeletonMetadata metadata = new SkeletonMetadata();
             metadata.setFileType(fileType);
+            metadata.setTitle(title);
             mapper.writeValue(writer, metadata);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -66,13 +65,16 @@ public class FileSystemRdfSkeletonImpl implements RdfSkeletonService {
     
     private String[] getStringAndFiletype(Path element){
         String name = element.getFileName().toString().split("\\.")[0];
-        String[] out = new String[2];
+        String[] out = new String[4];
         try {
             if (new File(element.getParent() + File.separator + element.getFileName().toString()).isFile() && element.getFileName().toString().contains("metadata")) {
                 SkeletonMetadata metadata = mapper.readValue(new File(element.getParent().toString() + File.separator + name + ".metadata.skeleton.json"), SkeletonMetadata.class);
                 
-                out[0] = name;
-                out[1] = metadata.getFileType();
+                out[0] = new String(Files.readAllBytes(Paths.get(SAVELOCATION.toString() + File.separator + name + ".skeleton.json" )));
+                out[1] = metadata.getTitle();
+                out[2] = metadata.getFileType();    
+                out[3] = name;
+                
             }
         } catch (IOException e) {
             throw new UncheckedIOException(e);

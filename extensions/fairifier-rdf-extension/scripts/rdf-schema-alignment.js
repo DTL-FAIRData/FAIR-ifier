@@ -115,28 +115,35 @@ RdfSchemaAlignmentDialog.prototype._constructBody = function(body) {
     elmts._save_skeleton.click(function(e){
     	e.preventDefault();
     	var schema = self.getJSON();
-    	Refine.postProcess(
-    	        "rdf-extension",
-                "save-rdf-schema",
-                {},
-                { schema: JSON.stringify(schema) },
-                {},
-                {   
-                    onDone: function() {
-                       theProject.overlayModels.rdfSchema = schema;
+    	rdfSkeletonMetadataDialog = new RdfSkeletonMetadataDialog(function(){
+            var schema = self.getJSON();
+            var title = $("input#title").val();
+            var fileType = $("input#fileType").val();
+            
+            if (fileType != null){
+                $.post("command/rdf-extension/save-rdf-skeleton",
+                        {model: JSON.stringify(self.getJSON()), 
+                    projectId: theProject.id, fileType: fileType, title: title},
+                    function(data){
+                        alert('RDF skeleton saved sucessfully');
                     }
-                }
-            );
-        var fileType = window.prompt("filetype","");
-        if (fileType != null){
-            $.post("command/rdf-extension/save-rdf-skeleton",
-                    {model: JSON.stringify(self.getJSON()), 
-                projectId: theProject.id, fileType: fileType},
-                function(data){
-                    alert('RDF skeleton saved sucessfully');
-                }
-            );
-        }
+                );
+            }
+            
+            
+            Refine.postProcess(
+                    "rdf-extension",
+                    "save-rdf-schema",
+                    {},
+                    { schema: JSON.stringify(schema) },
+                    {},
+                    {   
+                        onDone: function() {
+                           theProject.overlayModels.rdfSchema = schema;
+                        }
+                    }
+                );
+    	});
     });
     
     elmts.add_another_root_node.click(function(e){

@@ -13,8 +13,8 @@ import java.util.List;
  */
 
 interface RdfSkeletonService {
-    public List<String> listModels(String fileType) throws IOException;
-    public List<String> listModels()  throws IOException;
-    public void saveModel(String json, String fileType, String projectId)  throws IOException;
+    public List<String[]> listModels(String fileType) throws IOException;
+    public List<String[]> listModels()  throws IOException;
+    public void saveModel(String json, String fileType, String title, String proejctId)  throws IOException;
     public String loadModel(String ProjectId)  throws IOException;
 }

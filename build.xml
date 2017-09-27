@@ -155,6 +155,8 @@
         </copy>
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/fairDatapointPost-catalog.js" tofile="extensions/grefine-rdf-extension/module/scripts/fairDatapointPost-catalog.js" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/fairDatapointPost-dataset.js" tofile="extensions/grefine-rdf-extension/module/scripts/fairDatapointPost-dataset.js" />
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-skeleton-metadata.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-skeleton-metadata.js" />
+
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/fairDatapointPost-distribution.js" tofile="extensions/grefine-rdf-extension/module/scripts/fairDatapointPost-distribution.js" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/fairDatapointPost.js" tofile="extensions/grefine-rdf-extension/module/scripts/fairDatapointPost.js" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-alignment.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-schema-alignment.js" />

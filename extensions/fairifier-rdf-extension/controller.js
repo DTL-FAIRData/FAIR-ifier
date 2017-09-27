@@ -190,7 +190,8 @@ function init() {
             "scripts/fairDatapointPost-catalog.js",
             "scripts/fairDatapointPost-dataset.js",
             "scripts/fairDatapointPost-distribution.js",
-            "scripts/rdf-skeleton-list.js"
+            "scripts/rdf-skeleton-list.js",
+            "scripts/rdf-skeleton-metadata.js"
 		]
     );
 

@@ -13,6 +13,6 @@ public class SaveRdfSkeletonCommand extends Command{
     
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        rdfSkeletonService.saveModel(req.getParameter("model"), req.getParameter("fileType"), req.getParameter("projectId"));
+        rdfSkeletonService.saveModel(req.getParameter("model"), req.getParameter("fileType"), req.getParameter("title"), req.getParameter("projectId"));
     }
 }
