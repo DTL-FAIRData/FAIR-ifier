@@ -1,8 +1,10 @@
 var listData = {};
 
-function RdfSkeletonListDialog(func){
+function RdfSkeletonListDialog(func, schema, project){
     this._createDialog();
     this.func = func;
+    this._schema = schema;
+    this._project = project;
     this._rdfSkeleton = null;
 };
 
@@ -25,9 +27,12 @@ RdfSkeletonListDialog.prototype._constructFooter = function(footer) {
     var self = this;
     
     $('<button></button>').addClass('button').html("&nbsp;&nbsp;Load&nbsp;&nbsp;").click(function() {
-        $.post("command/rdf-extension/load-rdf-skeleton",  {projectId : listData[$( "select :selected" ).attr('id')].project},function(data){
-            self.func(data);
-            DialogSystem.dismissUntil(self._level - 1);
+        $.post("command/rdf-extension/load-rdf-skeleton",  {
+                project: self._project,
+                schema: JSON.stringify(self._schema),
+                projectId : listData[$( "select :selected" ).attr('id')].project
+            },function(data){
+                self.func(data);
         });
     }).appendTo(footer);
     
@@ -55,7 +60,6 @@ RdfSkeletonListDialog.prototype._constructBody = function(body) {
            option.click(function(evt){
                evt.preventDefault();
                $(".preview").html('');
-               console.log(data[event.target.id].skeleton);
                var skeleton = JSON.parse(data[event.target.id].skeleton);
                $("<h2>prefixes</h2>").appendTo(".preview")
                var prefList = $("<ul>");

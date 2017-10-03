@@ -103,13 +103,13 @@ RdfSchemaAlignmentDialog.prototype._constructBody = function(body) {
     elmts._load_skeleton.click(function(e){
         e.preventDefault();
         rdfSkeletonListDialog = new RdfSkeletonListDialog(function(rdfSkeleton){
-            
-            
+            console.log(rdfSkeleton);
             self._originalSchema = JSON.parse(rdfSkeleton['skeleton']);
             self._schema = cloneDeep(self._originalSchema); // this is what can be munched on
             self._nodeUIs = [];
             self._renderBody(body);
-        });
+            DialogSystem.dismissUntil(self._level);
+        }, self._schema, theProject.id);
     });
     
     elmts._save_skeleton.click(function(e){
