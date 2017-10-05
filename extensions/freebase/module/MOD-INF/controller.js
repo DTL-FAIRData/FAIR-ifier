@@ -89,7 +89,7 @@ function init() {
     "project/scripts",
     module,
     [
-      "scripts/extension.js",
+//      "scripts/extension.js", This needs to be commented out to prevent Undefined drop-down menu in FAIRifier
 
       "scripts/util/freebase.js",
 

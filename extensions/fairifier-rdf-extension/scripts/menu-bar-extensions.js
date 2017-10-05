@@ -77,12 +77,12 @@ RdfReconciliationManager.newSparqlService = function(){
 RdfReconciliationManager.newRdfService = function(){
 	new ReconciliationRdfServiceDialog();
 };
-RdfReconciliationManager.newSindiceService = function(){
-	new ReconciliationSindiceServiceDialog();
-};
-RdfReconciliationManager.newStanbolService = function(){
-	new ReconciliationStanbolServiceDialog();
-};
+//RdfReconciliationManager.newSindiceService = function(){
+//	new ReconciliationSindiceServiceDialog();
+//};
+//RdfReconciliationManager.newStanbolService = function(){
+//	new ReconciliationStanbolServiceDialog();
+//};
 
 RdfReconciliationManager.registerService = function(data,level){
 	if (data.code === "error"){
@@ -103,136 +103,136 @@ RdfReconciliationManager.registerService = function(data,level){
 		}
 	}
 };
-/*
-function ReconciliationStanbolServiceDialog() {
 
-    var self = this; 
+//function ReconciliationStanbolServiceDialog() {
+//
+//    var self = this; 
+//
+//    var dialog = $(DOM.loadHTML("rdf-extension", "scripts/stanbol-service.html"));
+//
+//    var inputUri = dialog.find("input#stanbol-uri");
+//
+//    dialog.find("button#cancel").click(function() {
+//        DialogSystem.dismissUntil(self._level - 1);
+//    });
+//
+//    dialog.find("button#register").click(function() {
+//    	
+//    	if ($("img#validation-img").length) { $("img#validation-img").remove(); }
+//    	
+//	    var uri = inputUri.val();
+//	    
+//	    if(uri.charAt(uri.length-1) == "/") {
+//	    	uri = uri.slice(0, -1);
+//	    	inputUri.val(uri);
+//	    }
+//    	
+//    	if (validateURI(uri)) {
+//    		inputUri.attr("disabled", "disabled");
+//    		inputUri.after($('<img src="extension/rdf-extension/images/spinner.gif" width="14" height="14" alt="fetching..." class="validation" id="validation-img" />'));
+//		    $.post("command/rdf-extension/addStanbolService",
+//				    {
+//					    "uri": uri,
+//	                    "engine": JSON.stringify(ui.browsingEngine.getJSON()),
+//	                    "project": theProject.id
+//				    },
+//				    function(data) {
+//				    	
+//				    	var registering = $("dl#stanbol-registering");
+//				    	registering.parent().height($("p#stanbol-help").height());
+//				    	registering.parent().fadeIn("slow");
+//				    	$("p#stanbol-help").hide();
+//				    	$.each(data, function(i, obj) {
+//				    		//check issue #579: http://code.google.com/p/google-refine/issues/detail?id=579
+//				    		if (ReconciliationManager.getServiceFromUrl(obj.uri)) {
+//				    			self.printAddedService(registering, obj, false)
+//				    		} else {
+//					    	    ReconciliationManager.registerStandardService(obj.uri, function(index) {
+//					    	    	self.printAddedService(registering, obj, true)
+//					    	    });	
+//				    		}
+//				    	});
+//				    	$("img#validation-img").remove();
+//				    	//DialogSystem.dismissUntil(self._level - 1);
+//				    	dialog.find("button#register").hide();
+//				    	dialog.find("button#cancel").text("Close");
+//		            },
+//	                "json");
+//    	} else {
+//    		inputUri.addClass("error");
+//    		inputUri.after($('<img src="extension/rdf-extension/images/no.png" width="16" height="16" alt="invalid" class="validation" id="validation-img" />'));	
+//    		alert("Not valid URI")
+//    	}
+//    });
+//	
+//	var frame = DialogSystem.createDialog();
+//    frame.width("500px");
+//    dialog.appendTo(frame);
+//    
+//	self._level = DialogSystem.showDialog(frame);
+//	
+//};
+//
+//ReconciliationStanbolServiceDialog.prototype.printAddedService = function(container, obj, registered) {
+//	var cached = (obj.local ? "locally cached" : "not locally cached");
+//	var image = (registered ? "yes" : "no");
+//	var label = (registered ? "registered" : "not added (service already registered)");
+//	var sniper = '<dt><a href="' + obj.uri + '">' + obj.uri + '</a> <img src="extension/rdf-extension/images/' + image + '.png" width="16" height="16" alt="' + label + '" title="' + label + '" /></dt><dd><strong>' + obj.name + '</strong>, ' + cached + '</dd>';
+//	if (!registered) {
+//		sniper += '<dd>' + label + '</dd>';
+//	}
+//	container.append(sniper).fadeIn("slow");
+//};
+//
+//function ReconciliationSindiceServiceDialog(){
+//	var self = this;
+//	var frame = DialogSystem.createDialog();
+//    frame.width("400px");
+//    
+//    var header = $('<div></div>').addClass("dialog-header").text("Add reconciliation service").appendTo(frame);
+//    var body = $('<div class="grid-layout layout-full"></div>').addClass("dialog-body").appendTo(frame);
+//    var footer = $('<div></div>').addClass("dialog-footer").appendTo(frame);
+//    
+//    var html = $(
+//    	  '<div class="rdf-reconcile-spaced">' + 
+//    	    'Set up a new reconciliation service that uses <a target="_blank" href="http://www.sindice.com">Sindice.com</a> to search on a single site.' + 
+//    	  '</div>' +
+//    	  '<table>' +
+//    	    '<tr>' +
+//    	      '<th>' + 
+//    	  	    '<label>Domain:</label>' +
+//    	  	  '</th>' +
+//    	  	  '<td class="rdf-reconcile-spaced">' +
+//    	  	    '<input type="text" bind="domain" size="32" />' +
+//    	  	    '<div class="rdf-reconcile-field-details">e.g. dbpedia.org</div>' +
+//    	  	  '</td>' +
+//    	  	'</tr>' +
+//    	  '</table>'    		
+//    ).appendTo(body);
+//    
+//    self._elmts = DOM.bind(html);
+//    
+//    self._level = DialogSystem.showDialog(frame);
+//    self._footer(footer);
+//}
+//
+//ReconciliationSindiceServiceDialog.prototype._footer= function(footer){
+//	var self = this;
+//	$('<button></button>').addClass('button').html("&nbsp;&nbsp;Ok&nbsp;&nbsp;").click(function() {
+//        var domain = self._elmts.domain.val();
+//        if(!domain){
+//        	alert("Domain need to be provided!");
+//        	return;
+//        }
+//        $.post("command/rdf-extension/addSindiceService",{"domain":domain},function(data){
+//			RdfReconciliationManager.registerService(data,self._level);
+//		},"json");
+//    }).appendTo(footer);
+//	$('<button></button>').addClass('button').text("Cancel").click(function() {
+//        DialogSystem.dismissUntil(self._level - 1);
+//    }).appendTo(footer);
+//};
 
-    var dialog = $(DOM.loadHTML("rdf-extension", "scripts/stanbol-service.html"));
-
-    var inputUri = dialog.find("input#stanbol-uri");
-
-    dialog.find("button#cancel").click(function() {
-        DialogSystem.dismissUntil(self._level - 1);
-    });
-
-    dialog.find("button#register").click(function() {
-    	
-    	if ($("img#validation-img").length) { $("img#validation-img").remove(); }
-    	
-	    var uri = inputUri.val();
-	    
-	    if(uri.charAt(uri.length-1) == "/") {
-	    	uri = uri.slice(0, -1);
-	    	inputUri.val(uri);
-	    }
-    	
-    	if (validateURI(uri)) {
-    		inputUri.attr("disabled", "disabled");
-    		inputUri.after($('<img src="extension/rdf-extension/images/spinner.gif" width="14" height="14" alt="fetching..." class="validation" id="validation-img" />'));
-		    $.post("command/rdf-extension/addStanbolService",
-				    {
-					    "uri": uri,
-	                    "engine": JSON.stringify(ui.browsingEngine.getJSON()),
-	                    "project": theProject.id
-				    },
-				    function(data) {
-				    	
-				    	var registering = $("dl#stanbol-registering");
-				    	registering.parent().height($("p#stanbol-help").height());
-				    	registering.parent().fadeIn("slow");
-				    	$("p#stanbol-help").hide();
-				    	$.each(data, function(i, obj) {
-				    		//check issue #579: http://code.google.com/p/google-refine/issues/detail?id=579
-				    		if (ReconciliationManager.getServiceFromUrl(obj.uri)) {
-				    			self.printAddedService(registering, obj, false)
-				    		} else {
-					    	    ReconciliationManager.registerStandardService(obj.uri, function(index) {
-					    	    	self.printAddedService(registering, obj, true)
-					    	    });	
-				    		}
-				    	});
-				    	$("img#validation-img").remove();
-				    	//DialogSystem.dismissUntil(self._level - 1);
-				    	dialog.find("button#register").hide();
-				    	dialog.find("button#cancel").text("Close");
-		            },
-	                "json");
-    	} else {
-    		inputUri.addClass("error");
-    		inputUri.after($('<img src="extension/rdf-extension/images/no.png" width="16" height="16" alt="invalid" class="validation" id="validation-img" />'));	
-    		alert("Not valid URI")
-    	}
-    });
-	
-	var frame = DialogSystem.createDialog();
-    frame.width("500px");
-    dialog.appendTo(frame);
-    
-	self._level = DialogSystem.showDialog(frame);
-	
-};
-
-ReconciliationStanbolServiceDialog.prototype.printAddedService = function(container, obj, registered) {
-	var cached = (obj.local ? "locally cached" : "not locally cached");
-	var image = (registered ? "yes" : "no");
-	var label = (registered ? "registered" : "not added (service already registered)");
-	var sniper = '<dt><a href="' + obj.uri + '">' + obj.uri + '</a> <img src="extension/rdf-extension/images/' + image + '.png" width="16" height="16" alt="' + label + '" title="' + label + '" /></dt><dd><strong>' + obj.name + '</strong>, ' + cached + '</dd>';
-	if (!registered) {
-		sniper += '<dd>' + label + '</dd>';
-	}
-	container.append(sniper).fadeIn("slow");
-};
-
-function ReconciliationSindiceServiceDialog(){
-	var self = this;
-	var frame = DialogSystem.createDialog();
-    frame.width("400px");
-    
-    var header = $('<div></div>').addClass("dialog-header").text("Add reconciliation service").appendTo(frame);
-    var body = $('<div class="grid-layout layout-full"></div>').addClass("dialog-body").appendTo(frame);
-    var footer = $('<div></div>').addClass("dialog-footer").appendTo(frame);
-    
-    var html = $(
-    	  '<div class="rdf-reconcile-spaced">' + 
-    	    'Set up a new reconciliation service that uses <a target="_blank" href="http://www.sindice.com">Sindice.com</a> to search on a single site.' + 
-    	  '</div>' +
-    	  '<table>' +
-    	    '<tr>' +
-    	      '<th>' + 
-    	  	    '<label>Domain:</label>' +
-    	  	  '</th>' +
-    	  	  '<td class="rdf-reconcile-spaced">' +
-    	  	    '<input type="text" bind="domain" size="32" />' +
-    	  	    '<div class="rdf-reconcile-field-details">e.g. dbpedia.org</div>' +
-    	  	  '</td>' +
-    	  	'</tr>' +
-    	  '</table>'    		
-    ).appendTo(body);
-    
-    self._elmts = DOM.bind(html);
-    
-    self._level = DialogSystem.showDialog(frame);
-    self._footer(footer);
-}
-
-ReconciliationSindiceServiceDialog.prototype._footer= function(footer){
-	var self = this;
-	$('<button></button>').addClass('button').html("&nbsp;&nbsp;Ok&nbsp;&nbsp;").click(function() {
-        var domain = self._elmts.domain.val();
-        if(!domain){
-        	alert("Domain need to be provided!");
-        	return;
-        }
-        $.post("command/rdf-extension/addSindiceService",{"domain":domain},function(data){
-			RdfReconciliationManager.registerService(data,self._level);
-		},"json");
-    }).appendTo(footer);
-	$('<button></button>').addClass('button').text("Cancel").click(function() {
-        DialogSystem.dismissUntil(self._level - 1);
-    }).appendTo(footer);
-};
-*/
 function ReconciliationRdfServiceDialog(){
 	var self = this;
 	var dialog = $(DOM.loadHTML("rdf-extension","scripts/rdf-service-dialog.html"));
@@ -439,14 +439,13 @@ RdfReconciliationManager.synchronizeServices = function(onDone){
 			ids.push(services[i].url);
 		}
 	}
-	/*
-	$.post("command/rdf-extension/initializeServices",{"services":JSON.stringify(ids)},function(data){
-		RdfReconciliationManager.registerService(data);
-		if(onDone){
-			onDone();
-		}
-	},"json");
-	*/
+
+//	$.post("command/rdf-extension/initializeServices",{"services":JSON.stringify(ids)},function(data){
+//		RdfReconciliationManager.registerService(data);
+//		if(onDone){
+//			onDone();
+//		}
+//	},"json");
 };
 
 
