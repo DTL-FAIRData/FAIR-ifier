@@ -94,8 +94,4 @@ RdfSkeletonListDialog.prototype._constructBody = function(body) {
     $('<div class="preview" style="overflow:auto;height:75%;float:right;"></div></div>').appendTo(container);
     $(container).appendTo(body);
 
-//TODO: add nested node retrieval to preview (should be recursive solution)
-//    function getPropertiesOfNode(node){
-//        
-//    }
 };

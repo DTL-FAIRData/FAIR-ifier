@@ -218,7 +218,7 @@ RdfSchemaAlignmentDialog.prototype._renderBody = function(body) {
    // $("#rdf-schema-alignment-tabs-vocabulary-manager").css("display", "");
 
     this._canvas = $(".schema-alignment-dialog-canvas");
-    $("table.schema-alignment-table-layout").html("");
+    $("table.schema-alignment-table-layout").remove();
     this._nodeTable = $('<table></table>').addClass("schema-alignment-table-layout").addClass("rdf-schema-alignment-table-layout").appendTo(this._canvas)[0];
         
     for (var i = 0; i < this._schema.rootNodes.length; i++) {
