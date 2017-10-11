@@ -65,5 +65,24 @@
 	<classpathentry kind="lib" path="server/lib/servlet-api-2.5.jar"/>
 	<classpathentry kind="lib" path="server/lib/slf4j-api-1.5.6.jar"/>
 	<classpathentry kind="lib" path="server/lib/slf4j-log4j12-1.5.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/fairmetadata4j-0.1-beta.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-model-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-query-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-queryalgebra-evaluation-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-repository-api-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-repository-sail-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-rio-api-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-rio-datatypes-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-rio-languages-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-rio-nquads-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-rio-ntriples-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-rio-rdfxml-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-rio-trig-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-rio-turtle-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-sail-api-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-sail-federation-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-sail-inferencer-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-sail-memory-2.1.6.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/rdf4j-util-2.1.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

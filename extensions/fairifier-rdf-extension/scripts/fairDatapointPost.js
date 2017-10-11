@@ -101,9 +101,10 @@ fairDataPointPostDialog.prototype._constructFooter = function(footer) {
 
 	      xhr.addEventListener('load', function(e) {
 	        var ret = JSON.parse(this.responseText);
+	        console.log(fairDataPointPost);
 	        if (ret.code === "ok"){
 	          $(".progress").hide();
-	          alert("FAIR data pushed"); 
+	          alert("FAIR data pushed");
 	          DialogSystem.dismissAll();
 	        } else{
 	          $(".progress").hide();
