@@ -252,7 +252,9 @@ getFairDatasets = function(url, self){
         self.hasDatasets = false;
 
        data.content.forEach(function(element){
-                $('<option></option>').attr('value',element.uri.namespace + element.uri.localName).text(element.uri.localName + " - " + element.title.label).appendTo(add_dat_available_html);
+                $('<option></option>').attr('value',
+                        element.uri.namespace + element.uri.localName).text(element.uri.localName + " - " + element.title.label)
+                        .appendTo(add_dat_available_html);
                 self.hasDatasets = true;
         });
 

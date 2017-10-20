@@ -67,5 +67,11 @@
 	<classpathentry kind="lib" path="server/lib/slf4j-log4j12-1.5.6.jar"/>
 	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/fairmetadata4j-0.1-beta.jar"/>
 	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/eclipse-rdf4j-2.1.6-onejar.jar"/>
+	<classpathentry kind="lib" path="extensions/grefine-rdf-extension/module/MOD-INF/lib/eclipse-rdf4j-2.1.6-onejar.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/jackson-core-2.9.0.pr4.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/jackson-annotations-2.9.0.pr4.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/jackson-core-asl-1.9.5.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/jackson-databind-2.9.0.pr4.jar"/>
+	<classpathentry kind="lib" path="extensions/fairifier-rdf-extension/lib/jackson-mapper-asl-1.9.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

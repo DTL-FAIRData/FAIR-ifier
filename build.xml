@@ -206,7 +206,9 @@
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/config.xml" tofile="extensions/grefine-rdf-extension/config.xml" />
 
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/RdfSchema.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/RdfSchema.java" />
-       
+
+       	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/reconcile/commands/AddStanbolServiceCommand.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/reconcile/commands/AddStanbolServiceCommand.java" />
+
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellLiteralNode.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/CellLiteralNode.java" />
 
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellLiteralNode.java" tofile="src/org/deri/grefine/rdf/CellLiteralNode.java" />
@@ -221,7 +223,7 @@
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/commands/PreviewRdfValueExpressionCommand.java" tofile="src/org/deri/grefine/rdf/commands/PreviewRdfValueExpressionCommand.java" />
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/expr/RdfBinder.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/expr/RdfBinder.java" />
         <copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/Util.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/Util.java" />
-    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/HttpUtils.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/utils/HttpUtils.java" />
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/utils/HttpUtils.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/utils/HttpUtils.java" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/menu-bar-extensions.js" tofile="extensions/grefine-rdf-extension/module/scripts/menu-bar-extensions.js" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/menu-bar-extensions.js" tofile="module/scripts/menu-bar-extensions.js" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/scripts/rdf-schema-alignment-ui-link.js" tofile="extensions/grefine-rdf-extension/module/scripts/rdf-schema-alignment-ui-link.js" />

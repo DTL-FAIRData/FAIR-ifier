@@ -1,11 +1,12 @@
 var listData = {};
 
-function RdfSkeletonListDialog(func, schema, project){
+function RdfSkeletonListDialog(func, schema, project, baseuri){
     this._createDialog();
     this.func = func;
     this._schema = schema;
     this._project = project;
     this._rdfSkeleton = null;
+    this._baseuri = baseuri;
 };
 
 RdfSkeletonListDialog.prototype._createDialog = function() {
@@ -27,10 +28,12 @@ RdfSkeletonListDialog.prototype._constructFooter = function(footer) {
     var self = this;
     
     $('<button></button>').addClass('button').html("&nbsp;&nbsp;Load&nbsp;&nbsp;").click(function() {
+        self._schema['baseUri'] = self._baseuri;
+        self._schema = JSON.stringify(self._schema);
         $.post("command/rdf-extension/load-rdf-skeleton",  {
                 project: self._project,
-                schema: JSON.stringify(self._schema),
-                projectId : listData[$( "select :selected" ).attr('id')].project
+                schema : self._schema,
+                projectId : listData[$( "select: selected" ).attr('id')].project
             },function(data){
                 self.func(data);
         });
