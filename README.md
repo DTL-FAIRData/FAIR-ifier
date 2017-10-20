@@ -1,64 +1,91 @@
-# OpenRefine
+Dependencies:
+  - Java 8
+  - Apache Ant
 
-[![Build Status](https://travis-ci.org/OpenRefine/OpenRefine.png?branch=master)](https://travis-ci.org/OpenRefine/OpenRefine) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/210578308bba42c5922c767493e83cf4)](https://www.codacy.com/app/OpenRefine/OpenRefine) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=32795)](https://www.bountysource.com/trackers/32795-open-refine?utm_source=32795&utm_medium=shield&utm_campaign=TRACKER_BADGE)
 
-OpenRefine is a power tool that allows you to load data, understand it,
-clean it up, reconcile it, and augment it with data coming from
-the web. All with the comfort and privacy of your own computer.
+Building
+========
 
-[<img src="https://github.com/OpenRefine/OpenRefine/blob/master/graphics/icon/open-refine-256px.png" align="right">](http://openrefine.org)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7ac974a8e9a44c7a8fcf5f1b14419d4a)](https://www.codacy.com/app/Shamanou/FAIRifier?utm_source=github.com&utm_medium=referral&utm_content=DTL-FAIRData/FAIRifier&utm_campaign=badger)
 
-Download
------------------------
-* [OpenRefine 2.7](https://github.com/OpenRefine/OpenRefine/releases/tag/2.7)
+install depedencies (assuming Java 8 is installed)
 
-Documentation and Videos
--------------------------
-* [Documentation Wiki](https://github.com/OpenRefine/OpenRefine/wiki/Documentation-For-Users)
-* [FAQ](https://github.com/OpenRefine/OpenRefine/wiki/FAQ)
-* [Official Website and tutorial videos](http://openrefine.org)
+```
+sudo apt-get install ant
+```
 
-Contributing to the project
----------------------------
-* [Donate $](https://www.bountysource.com/teams/openrefine/issues)
-* [Developers Guide & Architecture](https://github.com/OpenRefine/OpenRefine/wiki/Documentation-For-Developers)
+download the git repository
+```
+git clone --recursive -b development https://github.com/DTL-FAIRData/FAIRifier.git
+```
+cd to the directory of the git repo
+```
+cd FAIRifier/
+```
+and now build
+```
+./refine build
+```
 
-Contact us
-----------
-* [Mailing List](https://groups.google.com/forum/#!forum/openrefine)
-* [Twitter](http://www.twitter.com/openrefine)
+Running
+==========
+Run the ./refine file
+```
+./refine
+```
 
-Licensing and legal issues
---------------------------
-OpenRefine is open source software and is licensed under the BSD license
-located in the [LICENSE.txt](LICENSE.txt). See that file also for information on open source
-libraries that OpenRefine depends on.
+Instructions
+============
 
-Credits
--------
-This software was created by Metaweb Technologies, Inc. and originally written
-and conceived by David Huynh <dfhuynh@google.com>. Metaweb Technologies, Inc.
-was acquired by Google, Inc. in July 2010 and the product was renamed Google Refine.
-In October 2012, it was renamed OpenRefine as it transitioned to a 
-community-supported product.
+Because the FAIRifier is based on OpenRefine it has all the functionalities of 
+OpenRefine. The main added functionality is to add the FAIRified data as RDF to 
+a data resource (FTP or virtuoso triple store - more to be added later). 
+This allows the user to push FAIR data to a resource and metadata to a FAIRDataPoint(FDP)
+with one application. The forms used to specify the metadata are the same as [the metadata editor](https://github.com/DTL-FAIRData/FAIR-metadata-editor/tree/develop).
+To access this new function first prepare the dataset to contain the RDF you want.
+You also need to have upload rights to a FDP. To push the data you need access 
+to a triple store or a FTP.
+Afterwards press the POST to FAIRDataPoint option in the Export menu.
 
-This is the full list of contributors (in chronological order):
+![alt tag](https://raw.githubusercontent.com/Shamanou/FAIRifier/development/git_tutorial_images/tutorial-1.png "Press the POST to FAIRDataPoint option in the Export menu")
 
- - David Huynh <dfhuynh@google.com>
- - Stefano Mazzocchi <stefanom@google.com>
- - Vishal Talwar <vtalwar@google.com> 
- - Jeff Fry <jfry@google.com>
- - Will Moffat <wdm@google.com>
- - James Home <jameshome@google.com>
- - Iain Sproat <iainsproat@gmail.com>
- - Tom Morris <tfmorris@gmail.com>
- - Heather Campbell <campbellh@google.com>
- - Thad Guidry <thadguidry@gmail.com>
- - Paul Makepeace <paulm@paulm.com>
- - Tomaž Šolc <tomaz.solc@zemanta.com>
- - Gabriel Sjoberg <GabrielSjoberg@gmail.com>
- - Rod Salazar <rodrod.salazar@gmail.com>
- - pxb <pxb1988@gmail.com>
- - Qi <jackyq2015@gmail.com>
- - Antonin Delpeuch <antonin@delpeuch.eu>
+Clicking the POST to FAIRDataPoint option will open the POST to Fair Data Point dialog.
+In the Base URI field requires you to fill in a the URL of the FDP where you want
+to store the metadata. Please fill in the complete url to the root of the FDP API.
 
+![alt tag](https://raw.githubusercontent.com/Shamanou/FAIRifier/development/git_tutorial_images/tutorial-2.png "Please fill in the complete url to the root of the FDP API.")
+
+When you click on the Apply button the catalogs menu will show up in the dialog.
+It will show a + with the text add catalog and a drop down menu which, when using 
+a non-empty FDP, will show all the catalogs in the FDP. If the FDP is empty the
+drop down menu will be empty. Click on the + to add a new catalog.
+
+![alt tag](https://raw.githubusercontent.com/Shamanou/FAIRifier/development/git_tutorial_images/tutorial-3.png "Click on the + to add a new catalog.")
+
+This will open the add new catalog dialog. Fill in this form, to add the metadata to the new catalog
+layer to the FDP.
+
+![alt tag](https://raw.githubusercontent.com/Shamanou/FAIRifier/development/git_tutorial_images/tutorial-4.png "This will open the add new catalog dialog.")
+
+When you click save You will return to the POST to FAIR Data Point dialog and a new 
+field will apear. This field will show a + add dataset and a dropdown menu. 
+The dropdown menu will list the datasets within the selected catalog, if the 
+catalog is empty or new the dropdown menu will be empty.
+
+![alt tag](https://raw.githubusercontent.com/Shamanou/FAIRifier/development/git_tutorial_images/tutorial-5.png "When you click save You will return to the POST to FAIR Data Point dialog and a new field will apear.")
+
+When you click the + button the Add new dataset to FAIR Data Point will apear. Fill in this form, to add the metadata to the new dataset layer to the FDP.
+
+![alt tag](https://raw.githubusercontent.com/Shamanou/FAIRifier/development/git_tutorial_images/tutorial-6.png "When you click the + button the Add new dataset to FAIR Data Point will apear.")
+
+When you click save You will return to the POST to FAIR Data Point dialog and a new 
+field will apear. This field will show a + add distribution and a dropdown menu. 
+The dropdown menu will list the distributions within the selected catalog, if the dataset 
+doesnt have any distributions the dropdown menu will be empty. You also have to select where to upload your distribution. All the resources that are set enabled in the XML configuration file, located at FAIRifier/extensions/grefine-rdf-extension/config.xml,  will be shown.
+
+![alt tag](https://raw.githubusercontent.com/Shamanou/FAIRifier/development/git_tutorial_images/tutorial-7.png "When you click save You will return to the POST to FAIR Data Point dialog and a new field will apear.")
+
+This will open the add new distribution dialog. Fill in this form, to add the metadata to the new distribution layer to the FDP.
+
+If everything is filled in correctly then you should see the uploading animation and when uploading
+is done a dialog should apear with the text FAIR data pushed.
