@@ -1,6 +1,8 @@
 # The FAIRifier
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d122f3edbb6e4ebfa8c74c4b219ce3a2)](https://www.codacy.com/app/Shamanou/FAIRifier?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Shamanou/FAIRifier&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7ac974a8e9a44c7a8fcf5f1b14419d4a)](https://www.codacy.com/app/Shamanou/FAIRifier?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DTL-FAIRData/FAIRifier&amp;utm_campaign=Badge_Grade)
+
+[![Build Status](https://travis-ci.org/DTL-FAIRData/FAIRifier.svg?branch=development)](https://travis-ci.org/DTL-FAIRData/FAIRifier)
 
 The FAIRifier is a tool to make messy data FAIR.
 FAIR stands for Findable, Accessable, Interoperable, Reusable.
