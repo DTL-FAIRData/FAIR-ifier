@@ -4,16 +4,13 @@ package org.dtls.fairifier;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Properties;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.deri.grefine.rdf.RdfSchema;
 import org.deri.grefine.rdf.operations.LoadRdfSchemaOperation;
 import org.json.JSONObject;
 import org.json.JSONWriter;
-
 import com.google.refine.commands.Command;
 import com.google.refine.history.HistoryEntry;
 import com.google.refine.model.AbstractOperation;
@@ -32,8 +29,9 @@ public class LoadRdfSkeletonCommand extends Command {
         res.setHeader("Content-Type", "application/json");
         JSONWriter writer = new JSONWriter(res.getWriter());
         try {
-            Project project = getProject(req); // this needs the project parameter, indicating the project on which the
-                                               // skeleton should be applied
+            // this needs the project parameter, indicating the project on which the skeleton should
+            // be applied
+            Project project = getProject(req);
 
             String jsonString = req.getParameter("schema");
             JSONObject json = ParsingUtilities.evaluateJsonStringToObject(jsonString);
@@ -49,11 +47,13 @@ public class LoadRdfSkeletonCommand extends Command {
         }
     }
 
-    private void performProcess(HttpServletRequest request, HttpServletResponse response, Project project,
-            Process process)
-            throws Exception {
-        Model out = rdfSkeletonService.loadModel(request.getParameter("projectId")); // this is the project where the
-                                                                                     // skeleton comes from
+    private void performProcess(HttpServletRequest request, HttpServletResponse response,
+            Project project, Process process) throws Exception {
+        Model out = rdfSkeletonService.loadModel(request.getParameter("projectId")); // this is the
+                                                                                     // project
+                                                                                     // where the
+                                                                                     // skeleton
+                                                                                     // comes from
         response.setCharacterEncoding("UTF-8");
         response.setHeader("Content-Type", "application/json");
 
