@@ -12,8 +12,6 @@ function RdfSchemaAlignmentDialog(schema) {
     this._schema.rootNodes.push(RdfSchemaAlignment.createNewRootNode());
   }
 
-  // this._schema = { rootNodes: [] };
-  // this._schema.rootNodes.push(RdfSchemaAlignment.createNewRootNode());
   this._nodeUIs = [];
   this._createDialog();
 
@@ -118,7 +116,45 @@ RdfSchemaAlignmentDialog.prototype._constructBody = function(body) {
                         self._nodeUIs = [];
                         self._renderBody(body);
                         DialogSystem.dismissUntil(self._level);
+                      } else {
+                        return;
                       }
+                    },
+                    function(rdfSkeleton) {
+                      $.getJSON("command/core/get-operations?" + $.param({
+                        project: theProject.id
+                      }), function(json) {
+                        var operations_old = json.entries.map(function(val) {
+                          return val['operation'];
+                        });
+
+                        if (operations_old.length == 1) {
+                          operations_old = [];
+                        } else {
+                          operations_old = operations_old.slice(-5);
+                        }
+                        var operations_new = JSON
+                                .parse(rdfSkeleton['skeleton']).operations;
+                        Refine.postCoreProcess("apply-operations", {}, {
+                          operations: JSON.stringify(operations_old
+                                  .concat(operations_new))
+                        }, {
+                          everythingChanged: true
+                        }, {
+                          onDone: function(o) {
+                            if (o.code == "pending") {
+                              Refine.update({
+                                everythingChanged: true
+                              });
+                            }
+                          }
+                        });
+                      });
+                      self._originalSchema = theProject.overlayModels.rdfSchema;
+                      self._schema = cloneDeep(self._originalSchema);
+                      self._nodeUIs = [];
+                      self._renderBody(body);
+                      DialogSystem.dismissUntil(self._level);
                     }, self._schema, theProject.id,
                     RdfSchemaAlignment._defaultNamespace);
           });
@@ -144,16 +180,21 @@ RdfSchemaAlignmentDialog.prototype._constructBody = function(body) {
       var title = $("input#title").val();
       var fileType = $("input#fileType").val();
 
-      if (fileType != null) {
+      var operations = $.getJSON("command/core/get-operations?" + $.param({
+        project: theProject.id
+      }), function(json) {
+        var model = self.getJSON();
+        model['operations'] = json.entries.map(function(val) {
+          return val['operation'];
+        });
         $.post("command/rdf-extension/save-rdf-skeleton", {
-          model: JSON.stringify(self.getJSON()),
+          model: JSON.stringify(model),
           projectId: theProject.id,
-          fileType: fileType,
           title: title
         }, function(data) {
           alert('RDF skeleton saved sucessfully');
         });
-      }
+      });
 
       Refine.postProcess("rdf-extension", "save-rdf-schema", {}, {
         schema: JSON.stringify(schema)
@@ -215,9 +256,8 @@ RdfSchemaAlignmentDialog.prototype._renderBody = function(body) {
 
   this._canvas = $(".schema-alignment-dialog-canvas");
   $("table.schema-alignment-table-layout").remove();
-  this._nodeTable = $('<table></table>').addClass(
-          "schema-alignment-table-layout").addClass(
-          "rdf-schema-alignment-table-layout").appendTo(this._canvas)[0];
+  this._nodeTable = $('<table>').addClass("schema-alignment-table-layout")
+          .addClass("rdf-schema-alignment-table-layout").appendTo(this._canvas)[0];
 
   for (var i = 0; i < this._schema.rootNodes.length; i++) {
     this._nodeUIs.push(new RdfSchemaAlignmentDialog.UINode(this,
