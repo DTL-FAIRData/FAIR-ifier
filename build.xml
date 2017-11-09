@@ -214,7 +214,9 @@
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellLiteralNode.java" tofile="src/org/deri/grefine/rdf/CellLiteralNode.java" />
     	
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellBlankNode.java" tofile="src/org/deri/grefine/rdf/CellBlankNode.java" />
-    	
+
+    	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/vocab/VocabularyImporter.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/vocab/VocabularyImporter.java" />
+
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellBlankNode.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/CellBlankNode.java" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/CellBlankNode.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/CellBlankNode.java" />
     	<copy overwrite="true" file="extensions/fairifier-rdf-extension/deri/grefine/rdf/expr/util/RdfExpressionUtil.java" tofile="extensions/grefine-rdf-extension/src/org/deri/grefine/rdf/expr/util/RdfExpressionUtil.java" />
