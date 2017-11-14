@@ -66,6 +66,8 @@ RdfSkeletonListDialog.prototype._renderPreview = function(schema) {
     this._nodeUIs.push(element);
   }
   $(".rdf-schema-list-table-layout").find('*').unbind('click');
+  $(".rdf-schema-list-table-layout").find("a:contains('add property')").remove();
+  $(".rdf-schema-list-table-layout").find("a:contains('add rdf:type')").remove();
   
 };
 
