@@ -11,6 +11,8 @@ import org.deri.grefine.rdf.RdfSchema;
 import org.deri.grefine.rdf.operations.LoadRdfSchemaOperation;
 import org.json.JSONObject;
 import org.json.JSONWriter;
+import com.google.common.net.HttpHeaders;
+import com.google.common.net.MediaType;
 import com.google.refine.commands.Command;
 import com.google.refine.history.HistoryEntry;
 import com.google.refine.model.AbstractOperation;
@@ -26,7 +28,7 @@ public class LoadRdfSkeletonCommand extends Command {
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         res.setCharacterEncoding("UTF-8");
-        res.setHeader("Content-Type", "application/json");
+        res.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.JSON_UTF_8.toString());
         JSONWriter writer = new JSONWriter(res.getWriter());
         try {
             // this needs the project parameter, indicating the project on which the skeleton should
@@ -49,13 +51,10 @@ public class LoadRdfSkeletonCommand extends Command {
 
     private void performProcess(HttpServletRequest request, HttpServletResponse response,
             Project project, Process process) throws Exception {
-        Model out = rdfSkeletonService.loadModel(request.getParameter("projectId")); // this is the
-                                                                                     // project
-                                                                                     // where the
-                                                                                     // skeleton
-                                                                                     // comes from
+        // this is the project where the skeleton comes from
+        Model out = rdfSkeletonService.loadModel(request.getParameter("projectId"));
         response.setCharacterEncoding("UTF-8");
-        response.setHeader("Content-Type", "application/json");
+        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.JSON_UTF_8.toString());
 
         HistoryEntry historyEntry = project.processManager.queueProcess(process);
         if (historyEntry != null) {
