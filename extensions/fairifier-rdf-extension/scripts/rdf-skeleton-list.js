@@ -7,18 +7,19 @@ function RdfSkeletonListDialog(func_a, func_b, schema, project, baseuri) {
   this._rdfSkeleton = null;
   this._baseuri = baseuri;
   this._nodeUIs = [];
-};
+}
+;
 
 RdfSkeletonListDialog.prototype._createDialog = function() {
   var self = this;
   var frame = DialogSystem.createDialog();
-  
+
   frame.width("1000px");
-  
+
   var header = $('<div></div>').addClass("dialog-header").text("RDF Skeleton List").appendTo(frame);
   var body = $('<div></div>').css('height', '450px').addClass("dialog-body").appendTo(frame);
   var footer = $('<div></div>').addClass("dialog-footer").appendTo(frame);
-  
+
   this._constructFooter(footer);
   this._constructBody(body);
   this._level = DialogSystem.showDialog(frame);
@@ -26,7 +27,7 @@ RdfSkeletonListDialog.prototype._createDialog = function() {
 
 RdfSkeletonListDialog.prototype._constructFooter = function(footer) {
   var self = this;
-  
+
   $('<button>').addClass('button').html("&nbsp;&nbsp;Load&nbsp;&nbsp;").click(function() {
     if (typeof self._schema !== 'undefined') {
       self._schema['baseUri'] = self._baseuri;
@@ -47,7 +48,7 @@ RdfSkeletonListDialog.prototype._constructFooter = function(footer) {
       }
     });
   }).appendTo(footer);
-  
+
   $('<button></button>').addClass('button').text("Cancel").click(function() {
     DialogSystem.dismissUntil(self._level - 1);
   }).appendTo(footer);
@@ -58,7 +59,7 @@ RdfSkeletonListDialog.prototype._renderPreview = function(schema) {
   this._canvas = $(".schema-list-dialog-canvas");
   $("table.schema-list-table-layout").remove();
   this._nodeTable = $('<table>').addClass("rdf-schema-list-table-layout").appendTo(this._canvas).prevObject[0];
-  
+
   for (var i = 0; i < schema.rootNodes.length; i++) {
     var element = new RdfSchemaAlignmentDialog.UINode(this, schema.rootNodes[i], this._nodeTable, {
       expanded: true
@@ -68,13 +69,13 @@ RdfSkeletonListDialog.prototype._renderPreview = function(schema) {
   $(".rdf-schema-list-table-layout").find('*').unbind('click');
   $(".rdf-schema-list-table-layout").find("a:contains('add property')").remove();
   $(".rdf-schema-list-table-layout").find("a:contains('add rdf:type')").remove();
-  
+
 };
 
 RdfSkeletonListDialog.prototype._constructBody = function(body) {
   self = this;
   $('<p>').text("Select a RDF skeleton saved earlier to apply to your data.").appendTo(body);
-  
+
   var container = $('<div>').css('display', 'block').css('overflow', 'hidden').attr('id', 'body');
   var horizontalcontainer = $('<div>').css('display', 'block');
   var html = $('<div>').css('float', 'left');
@@ -85,13 +86,13 @@ RdfSkeletonListDialog.prototype._constructBody = function(body) {
     for (var i = 0; i < data.length; i++) {
       var element = data[i];
       var option = $('<option>').attr('id', i).text(element.name);
-      
+
       option.click(function(evt) {
         evt.preventDefault();
         $(".metadatapreview").html("<h3>prefixes:</h3>");
         $(".preview").html('<div class="schema-list-dialog-canvas rdf-kust-dialog-canvas"></div>');
         var links = $("<ul>").css("margin-left", "20px");
-        var skeleton = JSON.parse(data[event.target.id].skeleton);
+        var skeleton = JSON.parse(data[evt.target.id].skeleton);
         for (var i = 0; i < skeleton.prefixes.length; i++) {
           var text = skeleton.prefixes[i].name + " - ";
           var link = "<a href='" + skeleton.prefixes[i].uri + "'>" + skeleton.prefixes[i].uri + "</a>";
