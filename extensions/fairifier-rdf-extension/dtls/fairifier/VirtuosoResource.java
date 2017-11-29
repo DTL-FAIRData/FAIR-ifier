@@ -2,7 +2,6 @@
 package org.dtls.fairifier;
 
 import java.io.IOException;
-
 import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.deri.grefine.rdf.utils.HttpUtils;
@@ -27,22 +26,16 @@ public class VirtuosoResource extends Resource {
 
     /**
      * 
-     * This constructor takes in the parameters needed to push to a Virtuoso WEBDAV
-     * directory.
+     * This constructor takes in the parameters needed to push to a Virtuoso WEBDAV directory.
      *
-     * @param host
-     *            the full hostname including the protocol, for example:
-     *            http://dtls.nl
-     * @param filename
-     *            the name with which the file will be saved on the Virtuoso server.
-     * @param username
-     *            the Virtuoso username
-     * @param password
-     *            the Virtuoso password
-     * @param directory
-     *            the path where the file should be store on the Virtuoso server.
+     * @param host the full hostname including the protocol, for example: http://dtls.nl
+     * @param filename the name with which the file will be saved on the Virtuoso server.
+     * @param username the Virtuoso username
+     * @param password the Virtuoso password
+     * @param directory the path where the file should be store on the Virtuoso server.
      */
-    public VirtuosoResource(String host, String filename, String username, String password, String directory) {
+    public VirtuosoResource(String host, String filename, String username, String password,
+            String directory) {
         this.host = host;
         this.filename = filename;
         this.username = username;
@@ -54,15 +47,15 @@ public class VirtuosoResource extends Resource {
      * Check if there is a model and if so push it to Virtuoso.
      * 
      */
-    public void push()
-            throws IOException, HttpException {
+    @Override
+    public void push() throws IOException, HttpException {
         if (!this.hasModel()) {
             throw new IllegalArgumentException("Data of Resource object not set!");
         } else {
             this.out = this.getModelString();
-            HttpResponse res = HttpUtils.put(this.host + this.directory + this.filename, this.out, this.username,
-                    this.password);
-            if (res.getStatusLine().getStatusCode() != 200) {
+            HttpResponse res = HttpUtils.put(this.host + this.directory + this.filename, this.out,
+                    this.username, this.password);
+            if (res.getStatusLine().getStatusCode() >= 400) {
                 throw new HttpException("Pushing data to Virtuso failed");
             }
         }
