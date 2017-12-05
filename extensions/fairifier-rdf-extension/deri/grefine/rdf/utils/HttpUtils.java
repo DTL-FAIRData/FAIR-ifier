@@ -2,7 +2,6 @@
 package org.deri.grefine.rdf.utils;
 
 import java.io.IOException;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -20,7 +19,6 @@ import org.apache.http.params.HttpParams;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.google.common.net.HttpHeaders;
 
 /**
@@ -70,6 +68,7 @@ public class HttpUtils {
         HttpPut put = new HttpPut(uri);
         put.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encodedAuth);
         put.setHeader(HttpHeaders.ACCEPT, RDFFormat.TURTLE.getDefaultMIMEType());
+        put.setHeader(HttpHeaders.CONTENT_TYPE, RDFFormat.TURTLE.getDefaultMIMEType());
         put.setEntity(new StringEntity(content));
         return put(put);
     }
@@ -90,8 +89,7 @@ public class HttpUtils {
         if (201 == response.getStatusLine().getStatusCode()) {
             return response;
         } else {
-            String msg = "Error performing PUT request: " + response.getStatusLine().getStatusCode() + " "
-                    + response.getStatusLine().getReasonPhrase();
+            String msg = "Error performing PUT request: " + response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase();
             log.error(msg);
             throw new ClientProtocolException(msg);
         }
@@ -104,8 +102,7 @@ public class HttpUtils {
         if (201 == response.getStatusLine().getStatusCode()) {
             return response;
         } else {
-            String msg = "Error performing POST request: " + response.getStatusLine().getStatusCode() + " "
-                    + response.getStatusLine().getReasonPhrase();
+            String msg = "Error performing POST request: " + response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase();
             log.error(msg);
             throw new ClientProtocolException(msg);
         }
@@ -118,8 +115,7 @@ public class HttpUtils {
         if (200 == response.getStatusLine().getStatusCode()) {
             return response;
         } else {
-            String msg = "Error performing GET request: " + response.getStatusLine().getStatusCode() + " "
-                    + response.getStatusLine().getReasonPhrase();
+            String msg = "Error performing GET request: " + response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase();
             log.error(msg);
             throw new ClientProtocolException(msg);
         }
