@@ -323,6 +323,7 @@ addFairDistribution = function(self) {
 		if (conf.pushToVirtuoso.enabled && !($(".virtuosoRadio").length)) {
 			var virtuoso_html = $('<br><br><input type="radio" value="virtuoso" class="virtuosoRadio" bind="virtuoso" checked><span>push FAIRified data to triplestore</span><br>').appendTo(self._datasetDiv);
 			var virtuoso_elmts = DOM.bind(virtuoso_html);
+			self.fairDataPointPost.uploadConfiguration = conf.pushToVirtuoso;
 		}
 		var ftpshown = false;
 		var virtuososhown = false;
