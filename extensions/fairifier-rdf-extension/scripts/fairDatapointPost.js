@@ -125,8 +125,6 @@ fairDataPointPostDialog.prototype._editBaseUri = function(src) {
 			self._distributionDiv.html('');
 			self._pushtoResourceDiv.html('');
 			self.uri = self._baseUriSpan.text();
-			getFairCatalogs(self._baseUriSpan.text(), self);
-			return;
 		}
 		MenuSystem.dismissAll();
 		self._replaceBaseUri(newBaseUri, false);
@@ -224,6 +222,7 @@ getFairCatalogs = function(rootUrl, self) {
 		}
 
 	}).fail(function(xhr, status, error) {
+		alert("Error retrieving metadata from FAIR DataPoint: " + error);
 	});
 };
 
