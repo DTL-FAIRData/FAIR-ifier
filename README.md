@@ -25,13 +25,12 @@ DTL’s mission is to establish an interconnected research infrastructure that e
 and international collaboration in a cost-effective manner.
 
 ## Getting Started
-
 Dependencies:
   - Java 8
   - Apache Ant
 
 ### Prequisites
-install depedencies (assuming Java 8 is installed)
+Install dependencies (assuming Java 8 is installed)
 
 ```
 sudo apt-get install ant
@@ -53,13 +52,25 @@ and now build
 ```
 
 ## Deployment
-
 Run the ./refine file
 ```
 ./refine
 ```
 
 You can find more information on the [FAIRifier wiki](https://github.com/DTL-FAIRData/FAIRifier/wiki).
+
+## Docker build
+The provided [Dockerfile](Dockerfile) will build a deployable docker image. You can add a `-v /my/configuration:/configuration` volume mapping to the `docker run` command to add the (configuration file)[https://github.com/DTL-FAIRData/FAIRifier/wiki/The-FAIRifier-on-Docker].
+
+Build the docker image by running:
+```
+docker build -t myfairifier .
+```
+
+Run the built image:
+```
+docker run --name fairifier -p 127.0.0.1:3333:3333 -d myfairifier
+```
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details 
