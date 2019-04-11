@@ -23,7 +23,8 @@ public class Util {
 	private static final String XSD_INT_URI = "http://www.w3.org/2001/XMLSchema#int";
 	private static final String XSD_DOUBLE_URI = "http://www.w3.org/2001/XMLSchema#double";
 	private static final String XSD_DATE_URI = "http://www.w3.org/2001/XMLSchema#date";
-
+	
+	
 	public static String resolveUri(URI base, String rel) {
 		// FIXME
 		try {
@@ -98,13 +99,13 @@ public class Util {
 		}
 	}
 	
-	public static Object evaluateExpression(Project project, String expression, String columnName, Row row, int rowIndex) throws ParsingException{
+	public static Object evaluateExpression(Project project, String expression, String columnName, Row row, int rowIndex, URI baseUri) throws ParsingException{
 		
 		Properties bindings = ExpressionUtils.createBindings(project);
         Evaluable eval = MetaParser.parse(expression);
         
         int cellIndex = (columnName==null||columnName.equals(""))?-1:project.columnModel.getColumnByName(columnName).getCellIndex();
         
-        return RdfExpressionUtil.evaluate(eval,bindings, row, rowIndex,columnName , cellIndex);
+        return RdfExpressionUtil.evaluate(eval,bindings, row, rowIndex,columnName , cellIndex, baseUri);
 	}
 }

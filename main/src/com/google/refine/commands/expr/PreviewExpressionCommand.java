@@ -71,7 +71,6 @@ public class PreviewExpressionCommand extends Command {
         
         try {
             Project project = getProject(request);
-            
             int cellIndex = Integer.parseInt(request.getParameter("cellIndex"));
             String columnName = cellIndex < 0 ? "" : project.columnModel.getColumnByCellIndex(cellIndex).getName();
             

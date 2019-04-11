@@ -1,6 +1,9 @@
+
 package org.dtls.fairifier;
 
-import java.io.StringWriter;
+import java.io.IOException;
+
+import org.apache.http.HttpException;
 
 /**
  * @author Shamanou van Leeuwen
@@ -8,20 +11,24 @@ import java.io.StringWriter;
  *
  */
 public abstract class Resource {
+
     public String fairData = null;
-    
-    public void setFairData(String fairData){
+
+    public void setFairData(String fairData) {
         this.fairData = fairData;
     }
-    
-    protected boolean hasModel(){
-        if (this.fairData == null) return false;
+
+    protected boolean hasModel() {
+        if (this.fairData == null) {
+            return false;
+        }
         return true;
     }
-    
-    protected String getModelString(){
+
+    protected String getModelString() {
         return this.fairData;
     }
-    
-    abstract void push();
+
+    abstract void push()
+            throws IOException, HttpException;
 }

@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.lucene.index.CorruptIndexException;
-import org.openrdf.repository.Repository;
-
-
+import org.eclipse.rdf4j.repository.Repository;;
 
 
 public interface IVocabularySearcher {

@@ -1,6 +1,9 @@
 package org.deri.grefine.rdf.expr.util;
 
+import java.io.IOException;
+import java.net.URI;
 import java.util.Properties;
+
 
 import com.google.refine.expr.Evaluable;
 import com.google.refine.expr.ExpressionUtils;
@@ -8,15 +11,16 @@ import com.google.refine.model.Cell;
 import com.google.refine.model.Row;
 
 public class RdfExpressionUtil {
-
-	public static Object evaluate(Evaluable eval,Properties bindings,Row row,int rowIndex,String columnName,int cellIndex){
+   
+    
+	public static Object evaluate(Evaluable eval,Properties bindings,Row row,int rowIndex,String columnName,int cellIndex, URI baseUri) {
 		Cell cell; 
 		if(cellIndex<0){
          	cell= new Cell(rowIndex,null);
          }else{
          	cell= row.getCell(cellIndex);
          }
-        ExpressionUtils.bind(bindings, row, rowIndex, columnName, cell);
+        ExpressionUtils.bind(bindings, row, rowIndex, columnName, cell, baseUri);
 		return eval.evaluate(bindings);
 	}
 }

@@ -222,6 +222,8 @@ download() {
     URL=$1
     DEST=$2
     
+    echo $DEST
+    
     check_downloaders
     
     if [ "$CURL" ] ; then
@@ -235,7 +237,7 @@ tool_download() {
     URL=$1
     FILE=$2
     DIR=$3
-    
+        
     cd $REFINE_TOOLS_DIR
         if [ ! -f "$FILE" ] ; then
             download $URL $FILE
@@ -386,9 +388,9 @@ appbundler_prepare() {
 virtualenv_prepare() {
     check_python
 
-    VIRTUALENV_DIR="virtualenv-1.9.1"
-    VIRTUALENV_FILE="${VIRTUALENV_DIR}.tar.gz"
-    VIRTUALENV_URL="http://pypi.python.org/packages/source/v/virtualenv/${VIRTUALENV_FILE}"
+    VIRTUALENV_DIR="virtualenv-15.1.0"
+    VIRTUALENV_FILE="$VIRTUALENV_DIR.tar.gz"
+    VIRTUALENV_URL="https://pypi.python.org/packages/d4/0c/9840c08189e030873387a73b90ada981885010dd9aea134d6de30cd24cb8/$VIRTUALENV_FILE#md5=44e19f4134906fe2d75124427dc9b716"
 
     tool_download $VIRTUALENV_URL $VIRTUALENV_FILE $VIRTUALENV_DIR
     
@@ -618,9 +620,9 @@ ui_test() {
     
     echo "Starting Windmill..."
     if [ -z "$INTERACTIVE" ] ; then
-        "$WINDMILL" firefox firebug loglevel=WARN http://${REFINE_HOST}:${REFINE_PORT}/ jsdir=$REFINE_TEST_DIR/client/src exit
+        "$WINDMILL" chrome loglevel=INFO http://${REFINE_HOST}:${REFINE_PORT}/ jsdir=$REFINE_TEST_DIR/client/src exit
     else
-        "$WINDMILL" firefox firebug loglevel=WARN http://${REFINE_HOST}:${REFINE_PORT}/
+        "$WINDMILL" chrome loglevel=INFO http://${REFINE_HOST}:${REFINE_PORT}/ jsdir=$REFINE_TEST_DIR/client/src
     fi
     
     echo ""

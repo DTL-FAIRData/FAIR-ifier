@@ -156,6 +156,9 @@ ExpressionPreviewDialog.Widget.prototype.getExpression = function(commit) {
     }
     
     s = this._getLanguage() + ":" + s;
+
+    console.log(s);
+
     if (commit) {
         $.post(
             "command/core/log-expression?" + $.param({ project: theProject.id, expression: s }),
@@ -205,7 +208,10 @@ ExpressionPreviewDialog.Widget.prototype._renderHelp = function(data) {
         },
         {   name: "rowIndex",
             description: $.i18n._('core-dialogs')["row-index"]
-        }
+        },
+	{   name: "baseUri",
+            description:  $.i18n._('core-dialogs')["base-uri"]
+	}
     ];
     for (var i = 0; i < vars.length; i++) {
         var variable = vars[i];

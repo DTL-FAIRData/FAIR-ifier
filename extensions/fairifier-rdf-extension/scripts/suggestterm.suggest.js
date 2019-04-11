@@ -31,7 +31,7 @@
 	                        	 o = this.options;
 	                        	 
 	                        	 var data = {};
-	                        	 var query = value;
+	                        	 var query = value.trim();
 	                             data[o.query_param_name] = query;
 	                             
 	                             clearTimeout(this.request.timeout);

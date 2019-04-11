@@ -42,14 +42,14 @@ import org.deri.grefine.rdf.vocab.Vocabulary;
 import org.deri.grefine.rdf.vocab.VocabularyImportException;
 import org.deri.grefine.rdf.vocab.VocabularyImporter;
 import org.deri.grefine.rdf.vocab.VocabularyIndexException;
-import org.openrdf.repository.Repository;
+import org.eclipse.rdf4j.repository.Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 public class VocabularySearcher implements IVocabularySearcher {
 
-	final static Logger logger = LoggerFactory.getLogger("vocabulary_searcher");
+	final static Logger logger = LoggerFactory.getLogger(VocabularySearcher.class);
 
 	private static final String CLASS_TYPE = "class";
 	private static final String PROPERTY_TYPE = "property";
@@ -74,16 +74,17 @@ public class VocabularySearcher implements IVocabularySearcher {
         }
 
 	@Override
-	public void importAndIndexVocabulary(String name, String uri, String fetchUrl,VocabularyImporter importer)throws VocabularyImportException, VocabularyIndexException,PrefixExistException, CorruptIndexException, IOException {
-		importAndIndexVocabulary(name, uri, fetchUrl, GLOBAL_VOCABULARY_PLACE_HOLDER,importer);
+	public void importAndIndexVocabulary(String name, String uri, String fetchUrl,VocabularyImporter importer) 
+	        throws VocabularyImportException, VocabularyIndexException,PrefixExistException, CorruptIndexException, IOException {
+	        importAndIndexVocabulary(name, uri, fetchUrl, GLOBAL_VOCABULARY_PLACE_HOLDER,importer);
 	}
 
 	@Override
-	public void importAndIndexVocabulary(String name, String uri, String fetchUrl, String projectId,VocabularyImporter importer) throws VocabularyImportException,VocabularyIndexException, PrefixExistException,
-			CorruptIndexException, IOException {
-		List<RDFSClass> classes = new ArrayList<RDFSClass>();
+	public void importAndIndexVocabulary(String name, String uri, String fetchUrl, String projectId,VocabularyImporter importer) 
+	        throws VocabularyImportException,VocabularyIndexException, PrefixExistException,CorruptIndexException, IOException {
+	        List<RDFSClass> classes = new ArrayList<RDFSClass>();
 		List<RDFSProperty> properties = new ArrayList<RDFSProperty>();
-		importer.importVocabulary(name, uri, fetchUrl,classes, properties);
+	        importer.importVocabulary(name, uri, fetchUrl,classes, properties);
 		indexTerms(name, uri, projectId, classes, properties);
 	}
 

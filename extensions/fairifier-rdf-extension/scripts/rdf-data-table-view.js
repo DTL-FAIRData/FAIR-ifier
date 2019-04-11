@@ -14,24 +14,26 @@ RdfDataTableView.previewOnVisibleRows = function(isLiteral,column, title, expres
     
   	function f () {}
     	
-   	$.extend(f.prototype,ExpressionPreviewDialog.prototype);
+   	$.extend(f.prototype, ExpressionPreviewDialog.Widget.prototype);
     	
     	/*f = function(){
     		
     	};*/
     
-   	f.prototype.generateWidgetHtmlOnlyGrel = function() {
+   	f.prototype.generateWidgetHtml = function() {
 	    var html = DOM.loadHTML("core", "scripts/dialogs/expression-preview-dialog.html");
 	    
 	    var languageOptions = [];
-	    var prefix = 'grel';
-           var info = theProject.scripting[prefix];
-	        languageOptions.push('<option value="' + prefix + '">' + info.name + '</option>');
+	    var prefixes = ['grel', 'jython'];
+	    for (var i = 0; i < prefixes.length; i++){
+	        var info = theProject.scripting[prefixes[i]];
+		    languageOptions.push('<option value="' + prefixes[i] + '">' + info.name + '</option>');
+	    }
 	    
 	    return html.replace("$LANGUAGE_OPTIONS$", languageOptions.join(""));
 	};
 	
-   	f.prototype.create= function(isLiteral,title, columnName, rowIndices, values, expression, baseUri,isRowNumberCell, onDone){
+   	f.prototype.create = function(isLiteral,title, columnName, rowIndices, values, expression, baseUri,isRowNumberCell, onDone){
    		var uriPreviewWidget = RdfDataTableView.getUriPreviewWidget(isLiteral,isRowNumberCell,baseUri);
     	f._onDone = onDone;
         var self = this;
@@ -41,7 +43,7 @@ RdfDataTableView.previewOnVisibleRows = function(isLiteral,column, title, expres
         var header = $('<div></div>').addClass("dialog-header").text(title).appendTo(frame);
         var body = $('<div></div>').addClass("dialog-body").appendTo(frame);
         var footer = $('<div></div>').addClass("dialog-footer").appendTo(frame);
-        var html = $(self.generateWidgetHtmlOnlyGrel()).appendTo(body);
+        var html = $(self.generateWidgetHtml()).appendTo(body);
         
         f._elmts = DOM.bind(html);
         
@@ -68,7 +70,7 @@ RdfDataTableView.previewOnVisibleRows = function(isLiteral,column, title, expres
         	uriPreviewWidget._timerID = null;
             
         	if (!(expression)) {
-        		uriPreviewWidget.expression = 'value';
+        		uriPreviewWidget.expression = 'jython:return value';
         	}else{
         		uriPreviewWidget.expression = expression;
         	}
@@ -78,15 +80,22 @@ RdfDataTableView.previewOnVisibleRows = function(isLiteral,column, title, expres
         	$("#expression-preview-tabs").tabs();
         	$("#expression-preview-tabs-history").css("display", "");
         	$("#expression-preview-tabs-help").css("display", "");
-            
-        	uriPreviewWidget._elmts.expressionPreviewLanguageSelect[0].value = "grel";
+                expr = uriPreviewWidget.expression.split(':');
+        	if (expr[0] == "grel" ){
+        	    uriPreviewWidget._elmts.expressionPreviewLanguageSelect[0].value = "grel";
+        	}else{
+        	    uriPreviewWidget._elmts.expressionPreviewLanguageSelect[0].value = "jython";
+        	}
         	uriPreviewWidget._elmts.expressionPreviewLanguageSelect.bind("change", function() {
         		$.cookie("scripting.lang", this.value);
+        		self._elmts = uriPreviewWidget._elmts;
+        		self._values = uriPreviewWidget._values;
+        		self._rowIndices = uriPreviewWidget._rowIndices;
         		self.update();
         	});
                 
         	uriPreviewWidget._elmts.expressionPreviewTextarea
-        	.attr("value", uriPreviewWidget.expression)
+        	.attr("value", expr.slice(1).join(':'))
             .keyup(function(){
             	uriPreviewWidget._scheduleUpdate();
             })
@@ -116,13 +125,12 @@ RdfDataTableView.getUriPreviewWidget = function(isLiteral,isRowNumberCell,baseUr
 		var expression = this.expression = $.trim(this._elmts.expressionPreviewTextarea[0].value);
 		var params = {
 				project: theProject.id,
-				expression: expression,
+				expression: $( "select[bind='expressionPreviewLanguageSelect'] option:selected" ).val() + ":"  + expression,
 				isUri:isLiteral?"0":"1",
 				columnName: isRowNumberCell?"":this._columnName,
-				baseUri:baseUri
+				baseUri:$("span[bind='baseUriSpan']").text()
 		};
 		this._prepareUpdate(params);
-    
 		var cmdUrl = "command/rdf-extension/preview-rdf-expression?" ;
 		$.post(
 				cmdUrl + $.param(params), 
@@ -169,6 +177,7 @@ RdfDataTableView.getUriPreviewWidget = function(isLiteral,isRowNumberCell,baseUr
 		if (this._results !== null) {
 			this._elmts.expressionPreviewParsingStatus.empty().removeClass("error").text("No syntax error.");
 		} else {
+		        console.log(data);
 			var message = (data.type == "parser") ? data.message : "Internal error";
 			this._elmts.expressionPreviewParsingStatus.empty().addClass("error").text(message);
 		}
@@ -184,8 +193,7 @@ RdfDataTableView.getUriPreviewWidget = function(isLiteral,isRowNumberCell,baseUr
 			if (this._results !== null) {
 				var v = this._results[i];
 				renderValue(tdValue, v);
-			}
-			if(!isLiteral){
+			} if(!isLiteral){
 				var absolutTtdValue = $(tr.insertCell(3)).addClass("expression-preview-value");
 				if (this._results !== null) {
 					var v = data.absolutes[i]==null?this._results[i]:data.absolutes[i];

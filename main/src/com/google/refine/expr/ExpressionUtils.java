@@ -33,7 +33,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package com.google.refine.expr;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URI;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -45,18 +47,22 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
 import com.google.refine.model.Cell;
 import com.google.refine.model.Project;
 import com.google.refine.model.Row;
+
 
 public class ExpressionUtils {
     
     static final protected Set<Binder> s_binders = new HashSet<Binder>();
 
+    
     static public void registerBinder(Binder binder) {
         s_binders.add(binder);
     }
 
+    
     static public Properties createBindings(Project project) {
         Properties bindings = new Properties();
 
@@ -73,6 +79,37 @@ public class ExpressionUtils {
         return bindings;
     }
 
+    static public void bind(Properties bindings, Row row, int rowIndex, String columnName, Cell cell, URI baseUri) {
+        Project project = (Project) bindings.get("project");
+
+        bindings.put("rowIndex", rowIndex);
+        bindings.put("row", new WrappedRow(project, rowIndex, row));
+        bindings.put("cells", new CellTuple(project, row));
+        
+        bindings.put("baseUri",  baseUri.toString());
+
+        if (columnName != null) {
+            bindings.put("columnName", columnName);
+        }
+
+        if (cell == null) {
+            bindings.remove("cell");
+            bindings.remove("value");
+        } else {
+            bindings.put("cell", new WrappedCell(project, columnName, cell));
+            if (cell.value == null) {
+                bindings.remove("value");
+            } else {
+                bindings.put("value", cell.value);
+            }
+        }
+
+        for (Binder binder : s_binders) {
+            binder.bind(bindings, row, rowIndex, columnName, cell, baseUri);
+        }
+    }
+
+    
     static public void bind(Properties bindings, Row row, int rowIndex, String columnName, Cell cell) {
         Project project = (Project) bindings.get("project");
 

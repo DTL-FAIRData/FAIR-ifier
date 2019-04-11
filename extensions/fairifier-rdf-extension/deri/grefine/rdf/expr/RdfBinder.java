@@ -1,6 +1,7 @@
 package org.deri.grefine.rdf.expr;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.Properties;
 
 import org.deri.grefine.rdf.Util;
@@ -19,14 +20,15 @@ public class RdfBinder implements Binder {
 	final static Logger logger = LoggerFactory.getLogger("RdfBinder");
 	
 	private ApplicationContext rdfContext;
+	private URI baseUri;
 	
 	public RdfBinder(ApplicationContext ctxt){
 		super();
 		this.rdfContext = ctxt;
 	}
     @Override
-    public void bind(Properties bindings, Row row, int rowIndex, String columnName, Cell cell) {
-        // nothing to do
+    public void bind(Properties bindings, Row row, int rowIndex, String columnName, Cell cell, URI baseUri) {
+            bindings.put("baseUri", baseUri);
     }
 
     @Override
@@ -38,6 +40,11 @@ public class RdfBinder implements Binder {
 		} catch (IOException e) {
 			logger.error("Unable to bind baseURI. Unable to create an index for RDF Schema", e);
 		}
+    }
+    @Override
+    public void bind(Properties bindings, Row row, int rowIndex, String columnName, Cell cell) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

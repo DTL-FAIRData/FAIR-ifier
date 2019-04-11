@@ -76,7 +76,7 @@ RdfPrefixesManager.prototype._addPrefix = function(msg,def_prefix,onDone){
 	var self = this;
 	var widget = new NewPrefixWidget(self);
 	widget.show(msg,def_prefix,function(name,uri){
-		self._prefixes.push({name:name,uri:uri});
+		self._prefixes.push({name:name,uri:encodeURI(uri)});
 		self._savePrefixes(function(){
 			self._showPrefixes();
 		});
@@ -99,7 +99,17 @@ RdfPrefixesManager.prototype._hasPrefix = function(name){
 * Some utility functions
 */
 RdfPrefixesManager.isPrefixedQname = function(qname){
-	return qname.match(/[_a-zA-Z][-_a-zA-Z0-9]*:($|([_a-zA-Z][-_a-zA-Z0-9]*))$/);
+        //bugfix for the bug where duplicate colon in url makes url invalidated
+        //the fix is to check if there more then 1 colons and if so apply the 
+        //regex only to the first two strings surounding the first colon.
+    
+        var regex = /[_a-zA-Z][-_a-zA-Z0-9]*:($|([_a-zA-Z][-_a-zA-Z0-9]*))$/;
+    
+        if ((qname.split(':').length -1) <= 1){
+            return qname.match(regex);
+        } else{
+            return (qname.split(':')[0]+ ':' +  qname.split(':')[1]).match(regex);
+        }
 };
 RdfPrefixesManager.deAssemble = function(qname){
 	var i = qname.indexOf(':');

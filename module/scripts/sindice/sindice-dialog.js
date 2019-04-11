@@ -1,3 +1,4 @@
+/*
 function SindiceDialog(){
 	
 }
@@ -62,3 +63,5 @@ SindiceDialog.prototype._footer = function(footer){
 		},"json");
     }).appendTo(footer);
 };
+
+*/

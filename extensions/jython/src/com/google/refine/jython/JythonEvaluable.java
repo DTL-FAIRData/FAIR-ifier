@@ -92,7 +92,7 @@ public class JythonEvaluable implements Evaluable {
         StringBuffer sb = new StringBuffer(1024);
         sb.append("def ");
         sb.append(s_functionName);
-        sb.append("(value, cell, cells, row, rowIndex):");
+        sb.append("(value, cell, cells, row, rowIndex, baseUri):");
         for (String line : lines) {
             sb.append("\n  ");
             sb.append(line);
@@ -111,7 +111,9 @@ public class JythonEvaluable implements Evaluable {
                     new JythonHasFieldsWrapper((HasFields) bindings.get("cell"), bindings),
                     new JythonHasFieldsWrapper((HasFields) bindings.get("cells"), bindings),
                     new JythonHasFieldsWrapper((HasFields) bindings.get("row"), bindings),
-                    Py.java2py( bindings.get("rowIndex") )
+                    Py.java2py( bindings.get("rowIndex") ),
+                    Py.java2py( bindings.get("baseUri") )
+                    
                 }
             );
 

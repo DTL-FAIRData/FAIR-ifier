@@ -23,11 +23,11 @@ import com.google.refine.model.Row;
 import com.google.refine.util.ParsingUtilities;
 
 public class PreviewRdfValueExpressionCommand extends PreviewExpressionCommand{
-
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		try {
+    
+        @Override
+        public void doPost(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
+                try {
             Project project = getProject(request);
             
             String columnName = request.getParameter("columnName");
@@ -44,9 +44,9 @@ public class PreviewRdfValueExpressionCommand extends PreviewExpressionCommand{
             String baseUri = request.getParameter("baseUri");
             URI base;
             try{
-            	base = new URI(baseUri);
+                base = new URI(baseUri);
             }catch(URISyntaxException ex){
-            	respond(response, "{ \"code\" : \"error\", \"message\" : \"Invalie Base URI\" }");
+                respond(response, "{ \"code\" : \"error\", \"message\" : \"Invalid Base URI\" }");
                 return;
             }
             response.setCharacterEncoding("UTF-8");
@@ -56,17 +56,17 @@ public class PreviewRdfValueExpressionCommand extends PreviewExpressionCommand{
             
             JSONWriter writer = new JSONWriter(response.getWriter());
             if(isUri){
-            	respondUriPreview(project, writer, rowIndices, expression, columnName, base);
+                respondUriPreview(project, writer, rowIndices, expression, columnName, base);
             }else{
-            	respondLiteralPreview(project, writer, rowIndices, expression, columnName);
+                respondLiteralPreview(project, writer, rowIndices, expression, columnName, base);
             }
         } catch (Exception e) {
             respondException(response, e);
         }
-	}
-	
-	private void respondUriPreview(Project project, JSONWriter writer, JSONArray rowIndices, String expression, String columnName, URI base) throws JSONException{
-		int length = rowIndices.length();
+        }
+        
+        private void respondUriPreview(Project project, JSONWriter writer, JSONArray rowIndices, String expression, String columnName, URI base) throws JSONException{
+                int length = rowIndices.length();
         
         writer.object();
         
@@ -79,7 +79,7 @@ public class PreviewRdfValueExpressionCommand extends PreviewExpressionCommand{
                 int rowIndex = rowIndices.getInt(i);
                 if (rowIndex >= 0 && rowIndex < project.rows.size()) {
                     Row row = project.rows.get(rowIndex);
-                    result = Util.evaluateExpression(project, expression, columnName, row, rowIndex); 
+                    result = Util.evaluateExpression(project, expression, columnName, row, rowIndex, base); 
                 }
                 
                 if (result == null) {
@@ -89,24 +89,24 @@ public class PreviewRdfValueExpressionCommand extends PreviewExpressionCommand{
                     writer.key("message"); writer.value(((EvalError) result).message);
                     writer.endObject();
                 } else {
-                	StringBuffer sb = new StringBuffer();
+                        StringBuffer sb = new StringBuffer();
                     writeValue(sb, result, false);
                     writer.value(sb.toString());
                     //prepare absolute value                    
-                	if (result.getClass().isArray()) {
-                		int lngth = Array.getLength(result);
-                		StringBuilder resolvedUrisVal = new StringBuilder("[");
-                		for(int k=0;k<lngth;k++){
-                			resolvedUrisVal.append(Util.resolveUri(base,Array.get(result, k).toString()));
-                			if(k<lngth-1){
-                				resolvedUrisVal.append(",");
-                			}
-                		}
-                		resolvedUrisVal.append("]");
-                		absolutes[i] = resolvedUrisVal.toString();
-                	} else {
+                        if (result.getClass().isArray()) {
+                                int lngth = Array.getLength(result);
+                                StringBuilder resolvedUrisVal = new StringBuilder("[");
+                                for(int k=0;k<lngth;k++){
+                                        resolvedUrisVal.append(Util.resolveUri(base,Array.get(result, k).toString()));
+                                        if(k<lngth-1){
+                                                resolvedUrisVal.append(",");
+                                        }
+                                }
+                                resolvedUrisVal.append("]");
+                                absolutes[i] = resolvedUrisVal.toString();
+                        } else {
                         absolutes[i] = Util.resolveUri(base,sb.toString());
-                	}
+                        }
                 }
             }
             writer.endArray();
@@ -114,17 +114,17 @@ public class PreviewRdfValueExpressionCommand extends PreviewExpressionCommand{
             //writing the absolutes
             writer.key("absolutes"); writer.array();
             for (int i = 0; i < length; i++) {
-            	writer.value(absolutes[i]);
+                writer.value(absolutes[i]);
             }
             writer.endArray();
             writer.key("code"); writer.value("ok");
         } catch (ParsingException e) {
-        	writer.endArray();
+                writer.endArray();
             writer.key("code"); writer.value("error");
             writer.key("type"); writer.value("parser");
             writer.key("message"); writer.value(e.getMessage());
         } catch (Exception e) {
-        	writer.endArray();
+                writer.endArray();
             writer.key("code"); writer.value("error");
             writer.key("type"); writer.value("other");
             writer.key("message"); writer.value(e.getMessage());
@@ -132,11 +132,11 @@ public class PreviewRdfValueExpressionCommand extends PreviewExpressionCommand{
         
         writer.endObject();
 
-	}
-	
-	
-	private void respondLiteralPreview(Project project, JSONWriter writer, JSONArray rowIndices, String expression, String columnName) throws JSONException{
-		int length = rowIndices.length();
+        }
+        
+        
+        private void respondLiteralPreview(Project project, JSONWriter writer, JSONArray rowIndices, String expression, String columnName, URI base) throws JSONException{
+                int length = rowIndices.length();
         
         writer.object();
         
@@ -147,7 +147,7 @@ public class PreviewRdfValueExpressionCommand extends PreviewExpressionCommand{
                 int rowIndex = rowIndices.getInt(i);
                 if (rowIndex >= 0 && rowIndex < project.rows.size()) {
                     Row row = project.rows.get(rowIndex);
-                    result = Util.evaluateExpression(project, expression, columnName, row, rowIndex); 
+                    result = Util.evaluateExpression(project, expression, columnName, row, rowIndex, base);
                 }
                 
                 if (result == null) {
@@ -170,7 +170,7 @@ public class PreviewRdfValueExpressionCommand extends PreviewExpressionCommand{
             writer.key("type"); writer.value("parser");
             writer.key("message"); writer.value(e.getMessage());
         } catch (Exception e) {
-        	writer.endArray();
+                writer.endArray();
             writer.key("code"); writer.value("error");
             writer.key("type"); writer.value("other");
             writer.key("message"); writer.value(e.getMessage());
@@ -178,5 +178,5 @@ public class PreviewRdfValueExpressionCommand extends PreviewExpressionCommand{
         
         writer.endObject();
 
-	}
+        }
 }
