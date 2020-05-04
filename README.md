@@ -1,3 +1,7 @@
+# FAIRifier (legacy implementation)
+:warning: This implementation of the FAIRifier is considered deprecated in favour of the newer [Openrefine metadata extension](https://github.com/FAIRDataTeam/Openrefine-metadata-extension) project. The newer implementation supports the most recent versions of the OpenRefine platform and is developed in close collaboration with the [FAIR Data Point](https://github.com/FAIRDataTeam/FAIRDataPoint) reference implementation. This legacy project is kept for historical purposes.
+
+# Original documentation
 Dependencies:
   - Java 8
   - Apache Ant
